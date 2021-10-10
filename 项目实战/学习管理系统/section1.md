@@ -40,7 +40,7 @@ pager:any = {
 };
 ```
 
-
+### 数据转化
 
 #### 将数组的JSON数据转化为数组
 
@@ -56,14 +56,34 @@ labApi.getList({
   prepareRender(data: any) {
     for(let i=0;i<data.data.list.length;i++){
       let row = data.data.list[i];
-      let subject = JSON.parse(row.subject);
-      row.subject = subject;
+      row.subject = JSON.parse(row.subject);
     }
   }
 })                                         
 ```
 
-#### 拥有不同权限的身份进入相同页面（组件）
+
+
+#### 多种格式数据统一转化为数组
+
+> 数据有可能是数组、数组的JSON数据（字符串）、空字符串。
+>
+> 不能对空字符串和数组使用 `JSON.parse`，否则报错。
+
+```javascript
+let subject = item.subject;
+if(typeof subject === "string"){
+    if(subject===""){
+        subject = "[]";
+    }
+    subject = JSON.parse(subject);
+}
+cellData.content =  subject;   
+```
+
+### 权限管理
+
+#### 进入相同页面（组件）
 
 > 从父组件传入自定义属性，根据传入的值，可以条件渲染某些模块，或执行不同的方法。  
 
