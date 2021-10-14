@@ -34,7 +34,33 @@ demo {
 
 
 
+## tree 树控件
 
+#### 模拟区块背景色
+
+> 树控件不存在同时包含图标和文字区域的（即单一选项）的元素，故想让它实现Menu的激活背景色效果，只能投机取巧。这里用伪元素来模拟背景色。
+
+```
+.ant-tree-treenode-selected::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 0;
+  /* 宽高与选项一致 */
+  width: 240px;
+  height: 44px;
+  background: rgba(81, 135, 255, .1);
+}
+.ant-tree-treenode-selected::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 0;
+  width: 3px;
+  height: 44px;
+  background:rgba(81,135,255,1);
+}
+```
 
 
 

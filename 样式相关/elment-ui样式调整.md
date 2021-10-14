@@ -109,5 +109,121 @@
 
 
 
+#### 分页按钮大小调整边距调整
+
+> 其中的图标、文字带有默认行高，由于修改了整体高度，其行高也要跟随高度进行修正，否则会不居中。
+
+
+```less
+//----------- 全局的分页样式 --------- 
+// 需要添加类名 global-pagination 才能生效
+.global-pagination.is-background .btn-next, .global-pagination.is-background .btn-prev, .global-pagination.is-background .el-pager li {
+  background-color: #fff;
+  border: 1px solid #D9D9D9;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+// 条数
+.global-pagination {
+  .el-pagination__sizes {
+    margin-left: 5px;
+    .el-input {
+      width: 82px;
+      .el-input__inner {
+        height: 32px;
+        background: #FFFFFF;
+        border-radius: 4px;
+        border: 1px solid #D9D9D9;
+      }
+      .el-input__icon {
+        line-height: 32px;
+      }
+    }	
+  }
+}
+
+// 跳转
+.global-pagination  {
+  .el-pagination__jump {
+    margin-left: 0;
+    color: rgba(0, 0, 0, 0.65);
+    .el-input {
+      margin: 0 8px;
+      line-height: 32px;
+      width: 48px;
+      .el-input__inner {
+        height: 32px;
+        background: #FFFFFF;
+        border-radius: 4px;
+        border: 1px solid #D9D9D9;
+      }
+    }
+  }	
+}
+```
+
+
+
+#### 按钮中的文字隔开
+
+> 靠文字间加空格实现。
+
+#### 透明背景按钮
+
+> 默认按钮自带内灰背景，朴素类型按钮则不会。
+
+#### 选择器高度改变
+
+> 调整样式改变高度后，箭头图标会错位，改掉其容器的默认的行高值即可。
+
+#### 单选框选项间排斥
+
+> 需要使用单选框组。
+
+#### 改变输入框的宽高
+
+> 还需要改变标签和容器的行高，否则错位。
+
+```less
+.el-form-item__label {
+  line-height: 32px;
+}
+.el-form-item__content {
+  line-height: 32px;
+  .el-input {
+    width: 468px;	
+    .el-input__inner {
+      height: 32px;
+    }
+  }
+}
+```
+
+#### 日期选择器图标右移
+
+> 好像不能像输入框一样，直接更改头部和尾部图标，故通过绝对定位实现。
+
+```less
+.birth-date {
+  .el-date-editor--month {
+    position: relative;
+    .el-input__inner {
+      // 改变默认边距
+      padding-left: 15px;
+    }
+  }
+  .el-input__prefix {
+    position: absolute;
+    left: 435px;	
+    top: -2px;  
+  }
+}
+```
+
+
+
+
+
 
 
