@@ -1,3 +1,15 @@
+## 请求参数选择
+
+> 如果使用GET请求，只能传入params属性（会被拼接到路径），故使用data和urlQueryParmas都可以。
+
+| POST请求  |     方式一     |  方式二  |
+| :-------: | :------------: | :------: |
+| 传参方式  |    拼接路径    | 传入实体 |
+| 对应axios |     params     |   data   |
+| 对应框架  | urlQueryParmas |   data   |
+
+
+
 ## captain.apply.helper.js
 
 ```javascript
@@ -250,13 +262,8 @@ import formHelper from '../../js/demo/demo.father.helper.js';
 
 
 文件 | 说明
-
 :- | :- 
-
 baseConfig | 含有服务器根路径、上传图片或文件时需要用到
-
 fisherRequest | 感觉就是列表请求，自动success，附带prepareRender和afterRender
-
 pageHelper | 查询多个编码表并返回到数据中
-
 formHelper | 提供表单原始绑定对象，验证规则
