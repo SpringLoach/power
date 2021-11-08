@@ -1,4 +1,4 @@
-## Vue2基础
+## 基础
 
 ### 与常规Vue的差异
 
@@ -259,6 +259,18 @@ watch: {
 
 
 
+### 内置组件映射表
+
+| Web                       | uni-app      | 说明 |
+| :------------------------ | :----------- | :--- |
+| <div\>                    | <view\>      | /    |
+| <span\>                   | <text\>      | /    |
+| <a\>                      | <navigator\> | /    |
+| <img/\>                   | <image/\>    | /    |
+| <input type="textarea"/\> | <textarea/\> | /    |
+
+
+
 ### 注册
 
 | 定义组件名                  | 引用                                    |
@@ -343,3 +355,109 @@ post: {
 1. `ref` 自身是作为渲染结果创建的，渲染前不能获取到它。
 2. 在 `v-for` 中使用的 `ref` ，其值为实例或DOM的数组。
 3. 非H5端只能用于获取自定义组件，不能用于获取内置组件实例（如：view、text）。
+
+
+
+### 自定义事件
+
+#### .sync 修饰符
+
+>  `.sync` 它会被扩展为一个自动更新父组件属性的 `v-on` 监听器。当子组件改变了 `prop` 的值时，这个变化也会同步到父组件中。
+
+`父组件`
+
+```less
+<view>
+  <syncA :title.sync="title"></syncA>
+</view>
+
+data() {
+  return {
+    title:"hello vue.js"
+  }
+}
+```
+
+`子组件`
+
+```less
+<view>
+  <view @click="changeTitle">{{title}}</view>
+</view>
+
+props: {
+  title: {
+    default: "hello"
+  },
+},
+methods:{
+  changeTitle(){
+    // 触发更新事件
+    this.$emit('update:title',"uni-app")
+  }
+}
+```
+
+
+
+### 插槽
+
+> 与常规的 vue 相似。
+
+
+| 项           | 说明                                                         |
+| :----------- | :----------------------------------------------------------- |
+| 编译作用域   | 使用插槽时，内部不能使用子组件的数据，因为插槽在父级模板中，交由父级作用域编译。 |
+| 默认内容     | 在没有提供内容的时候被渲染                                   |
+| 具名插槽     | 使用时，可以用 `#` 作为 `v-slot:` 的缩写                     |
+| 多个插槽     | 每个插槽都需要添加到 `<template>` 上                         |
+| 作用域插槽   | 可以在使用插槽时，让内部拿到子组件的数据（以Prop的形式）的一种技术 |
+| 解构插槽Prop | 获取子组件数据时，还可以结合对象解构获取具体属性、重命名、默认值等 |
+
+**作用域插槽**
+
+`子组件`
+
+```vue
+<view>
+  <slot :user="user">{{user.lastName}}</slot>
+</view>
+```
+
+`父组件`
+
+```vue
+<view>
+  <current-user>
+    <template v-slot:default="slotProps">
+      {{ slotProps.user.firstName }}
+    </template>
+  </current-user>
+</view>
+
+<!-- 相同的写法，因为不带参数的 v-slot 会被当做对应的默认插槽 -->
+<view>
+  <current-user>
+    <template v-slot="slotProps">
+      {{ slotProps.user.firstName }}
+    </template>
+  </current-user>
+</view>
+```
+
+> `v-slot` 的属性值的命名没有规定，喜欢就好。
+
+
+
+### 小程序不支持列表
+
+- 作用域插槽（HBuilderX 3.1.19 以下仅支持解构插槽且不可使用作用域外数据以及使用复杂的表达式）
+- 动态组件
+- 异步组件
+- `inline-template`
+- `X-Templates`
+- `keep-alive`（App端也未支持）
+- `transition` （可使用 `animation` 或 CSS 动画替代）
+
+
+
