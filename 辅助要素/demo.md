@@ -17,3 +17,8 @@ let arr = [
 this.areaList = [...arr, ...arr, ...arr, ...arr, ...arr, ...arr];
 ```
 
+
+
+## 阿里巴巴字体下载
+
+> https://www.iconfont.cn/webfont?spm=a313x.7781069.1998910419.d81ec59f2#!/webfont/index
