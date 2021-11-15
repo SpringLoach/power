@@ -267,3 +267,22 @@ baseConfig | 含有服务器根路径、上传图片或文件时需要用到
 fisherRequest | 感觉就是列表请求，自动success，附带prepareRender和afterRender
 pageHelper | 查询多个编码表并返回到数据中
 formHelper | 提供表单原始绑定对象，验证规则
+
+
+
+### 示例prepareRender
+
+> 很容易忽视的地方：该方法内部需要很多配置项，都在响应的 `data` 上，故不能返回 `data.data.list`。
+
+```javascript
+prepareRender(data:any){
+    let data.data.list = data.data.list.filter((item: any) => {
+        return (item.type == 'choice') || (item.type == 'mulChoice')
+    })
+    for(var i=0;i<data.data.list.length;i++){
+        newData[i]['selected'] = false;
+    }
+    return data;
+},
+```
+
