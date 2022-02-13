@@ -1,33 +1,21 @@
-## 功能实现
+## css预处理器
 
+### 应对环境命名风格
 
+```react
+<view class="tabs-container" :class="{ 'tabs-container--fixed': stickyFixed, 'tabs-container--nopadding': isNotPadding }"></view>
 
-### 更改图标颜色
-
-```css
-.el-icon-success {
-  color: #52C41A;
+<style lang="scss" scoped>
+.tabs-container {
+  padding: 0 30rpx;
+  &--fixed {
+    position: fixed;
+  }
+  &--nopadding {
+    padding: 0;
+  }
 }
-```
-
-
-
-### 按钮中文字的垂直居中
-
-> 如果是由于行高问题导致的位移，可以用下面这个方法尝试一下。
-
-```vue
-<button>
-  <span>按钮</span>
-</button>
-```
-
-```css
-button {
-  width: 130px;
-  height: 40px;
-  line-height: 0;
-}
+</style>
 ```
 
 
