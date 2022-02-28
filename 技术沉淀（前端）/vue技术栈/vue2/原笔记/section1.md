@@ -926,7 +926,7 @@ const demo = new Vue({
 })
 ```
 
-#### props的用法
+#### props的对象用法
 
 > `props` 选项的值通常为对象，在其中可以验证自定义属性的值等。
 
@@ -937,6 +937,8 @@ const demo = new Vue({
 5. 多个可能的类型
 6. 验证自定义属性的值是否与某项匹配
 
+<span style="backGround: #efe0b9">子组件</span>
+
 ```react
 props: {
     like1: String，
@@ -946,16 +948,19 @@ props: {
     }，
     like3: {
             type: Number,
-            default: 3,
             required: true
+    }，
+    like33: {
+            type: Number,
+            default: 3,
     }，
     like4: {
             type: Array,
             default() {
-                return [];
+                return [];  // 对象类型的默认值必须从函数工厂中获取
             }
     },
-    like5: [String，Number],
+    like5: [String，Number], // 多个可能的类型
     like6: {
         validator: funciton (value) {
             return ['a','b','c'].indexOf(value) !== -1
@@ -964,12 +969,39 @@ props: {
 }
 ```
 
+#### props的数组用法
+
+> 真实开发一般不会这么使用，这样定义不会限制它的类型。
+
+<span style="backGround: #efe0b9">子组件</span>
+
+```react
+props: ['like1', 'like2']
+```
+
 #### Prop的大小写
 
-| 命名方式   | 使用属性模板 | 使用字符串模板 |
-| ---------- | ------------ | -------------- |
-| camelCase  | kebab-case   | camelCase      |
-| kebab-case | kebab-case   | camelCase      |
+<span style="backGround: #efe0b9">demo.vue</span>
+
+```javascript
+props: {
+  menuTitle: {
+    type: String,
+    default: 'title'
+  }，
+}
+```
+
+<span style="backGround: #efe0b9">父组件</span>
+
+```react
+<demo menuTitle="你好" />
+<demo menu-title="你好" />
+```
+
+:whale: 两种写法都可以，但更推荐后者。
+
+
 
 ### 子传父
 
@@ -1137,7 +1169,7 @@ methods: {
 > 组件的插槽是为了让封装的组件更加具有扩展性。
 
 1. 插槽 `<slot>` 定义到模块内的某个位置（根元素内），组件标签中添加的内容会替换到相应的位置。
-2. 插槽内部有内容时，默认渲染。组件标签中有内容时，则会替代插槽的内容。
+2. 插槽内部有内容时，默认渲染。组件标签中有内容时（甚至允许为组件），则会替代插槽的内容。
 
 ```react
 <div id="demo">

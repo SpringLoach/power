@@ -269,7 +269,7 @@ for(const key in methods) {
 
 命令式编程：关注于<span style="color: #f7534f;font-weight:600">怎么做</span> ，如一般的原生开发
 
-命令式编程：关注于<span style="color: #f7534f;font-weight:600">做什么</span> ， 一般由框架（机器）完成<span style="color: #f7534f;font-weight:600">怎么做</span>的过程，如 Vue、React。
+声明式编程：关注于<span style="color: #f7534f;font-weight:600">做什么</span> ， 一般由框架（机器）完成<span style="color: #f7534f;font-weight:600">怎么做</span>的过程，如 Vue、React。
 
 
 
@@ -1559,7 +1559,15 @@ devServer: {
 
 <span style="color: #f7534f;font-weight:600">0.0.0.0</span> 监听IPV4上所有的地址，再根据端口找到不同的应用程序; 
 
--  在监听 0.0.0.0时，<span style="color: #ff0000">在同一个网段下的主机中，通过ip地址是可以访问的;</span>
+-  在监听 0.0.0.0时，<span style="color: #ff0000">在同一个网段下的其它主机，通过ip地址是可以访问它的;</span>
+
+:whale: <span style="color: #ff0000">在浏览器访问时</span>， 对于 window 系统，`0.0.0.0` 的地址可能不能被正常解析，可以用以下任意去替代。
+
+```react
+localhost
+127.0.0.1
+局域网的IP地址
+```
 
 
 
@@ -1757,11 +1765,6 @@ resolve: {
 
 #### 确定导入资源类型
 
-```
-```
-
- 
-
 <span style="color: #f7534f;font-weight:600">如果是文件</span>
 
 - 如果文件具有扩展名，则直接打包文件；
@@ -1887,4 +1890,1106 @@ module.export = merge(commomConfig, {
 
 - 需要将配置中的 `./` 改为 `../`
 - 但是部分配置和插件中的路径是相对于根路径决定的，不需要修改它们的 `./`
+
+
+
+## Vite新增语法特性(二)
+
+### Vue-CLI 的安装和使用
+
+#### 全局安装
+
+```elm
+npm install @vue/cli -g
+```
+
+:ghost: 以便在任何位置使用命令
+
+#### 升级版本
+
+```elm
+npm update @vue/cli -g
+```
+
+#### 创建项目
+
+```elm
+vue create xxname
+```
+
+> xxname 为项目的名称
+
+
+
+### 浏览器适配
+
+<span style="backGround: #efe0b9">.browserslistrx</span>
+
+```react
+> 1%                  // 市场份额大于1%
+last 2 versions       // 每个浏览器的最后两个版本
+not dead              // 仍在维护
+```
+
+> 根据这些条件决定要打包的css和js要适配哪些浏览器。
+
+
+
+### !-- vuecli原理 --
+
+> 第十集 00:50左右
+
+
+
+### 认识Vite
+
+> 其它的前端构建工具，像webpack，因为需要对代码（ES6、TypeScript、Vue文件）进行转换、编译，故需要很长的时间才能开启服务器，HMR也需要较久才能在浏览器反应出来。而 Vite 的特点就是<span style="color: #ff0000">快速</span>，能够显著提升前端开发体验。
+
+
+
+### Vite的构造
+
+> 主要由两部分组成。
+
+<span style="color: #f7534f;font-weight:600">一个开发服务器</span>，它基于原生ES模块提供了丰富的内建功能，HMR的速度非常快速； 
+
+<span style="color: #f7534f;font-weight:600">一套构建指令</span>，它使用rollup打开我们的代码，并且它是预配置的，可以输出生成环境的优化过的静态资源；
+
+
+
+#### 新版浏览器
+
+> 本身可以支持 ES Module 和 ES6，故下面的代码可以成功运行。
+
+<span style="backGround: #efe0b9">index.html</span>
+
+```react
+<script src="./src/demo.js" type="module"></script>
+```
+
+<span style="backGround: #efe0b9">demo.js</span>
+
+```react
+import { sum } from '.js/math.js';
+
+console.log(sum);
+```
+
+
+
+##### 缺点
+
+- 无法解析模块路径，不能省略导入文件的拓展名；
+
+- 使用依赖过多的包时，由于模块过多而发送大量的网络请求，对于浏览器发送请求是巨大的消耗； 
+
+- 如果项目存在TypeScript、less、vue等代码时，浏览器并不能直接识别
+
+- 使用 Vite 无需配置即可解决这些问题。
+
+
+
+### 原理
+
+在开发阶段，使用支持 ES6 的浏览器，用于减少构建成本。
+
+在打包阶段，转化为 ES5，去适配低版本的浏览器。
+
+Vite 在处理 `xx.ts`、`yy.less` 这些文件时，会在本地的服务器（Connect）转化编译为浏览器能够识别的 <span style="color: #ff0000">ES6的 Javascript 代码</span>，但不变更文件名称，然后发送给浏览器。
+
+:turtle: 处理 `.less` 时，把样式以 style 标签的形式插入文档中。
+
+在执行 `npx vite` 时，会在 `node_modules` 的 `.vite` 下对某些模块（如vue）进行预打包，在第二次及以后再次启动开发服务器会快很多，后续如果修改了这些模块，会进行重新打包。
+
+
+
+### Vite的学习使用
+
+#### 安装和使用
+
+> Vite 本身依赖于 Node，且要求 Node 的版本大于12。
+
+`局部安装`
+
+```elm
+npm install vite –D
+```
+
+`启动项目`
+
+```elm
+npx vite
+```
+
+
+
+#### 对css的支持
+
+##### css
+
+> 无需任何配置，原本就支持。
+
+
+
+##### less
+
+```elm
+npm install less -D
+```
+
+
+
+##### postcss
+
+```elm
+npm install postcss -D
+```
+
+```elm
+npm install postcss-preset-env -D
+```
+
+:ghost: 要借助插件去完成功能。
+
+<span style="backGround: #efe0b9">postcss.config.js</span>
+
+```react
+module.exports = {
+  plugins: [
+    require('postcss-preset-env')
+  ]
+}
+```
+
+
+
+#### 对TypeScript的支持
+
+> 无需任何配置，它会直接使用ESBuild来完成编译。
+
+
+
+#### 对vue的支持
+
+```elm
+npm install vue@next -D
+```
+
+vite对vue支持还需要根据所需安装以下某项： 
+
+- Vue 3 单文件组件：@vitejs/plugin-vue
+
+- Vue 3 JSX ：@vitejs/plugin-vue-jsx
+
+- Vue 2 ：underfin/vite-plugin-vue2 
+
+```elm
+npm install @vitejs/plugin-vue -D
+```
+
+:whale: 这里以引入单文件组件为栗。
+
+```elm
+npm install @vue/compiler-sfc -D
+```
+
+<span style="backGround: #efe0b9">vite.config.js</span>
+
+```react
+import vue require('@vitejs/plugin-vue')
+
+module.exports = {
+  plugins: [
+    vue()
+  ]
+}
+```
+
+
+
+#### 打包及打包预览
+
+`打包`
+
+```elm
+npx vite build
+```
+
+`预览打包效果`
+
+```elm
+npx vite preview
+```
+
+
+
+#### 项目常用快捷配置
+
+<span style="backGround: #efe0b9">package.json</span>
+
+```elm
+"scripts": {
+  "serve": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+}
+```
+
+
+
+#### ESBuild解析
+
+> vite 本身依赖了 ESBuild，有着更高的构建速度。
+
+- 超快的构建速度，并且不需要缓存； 
+- 支持ES6和CommonJS的模块化； 
+- 支持ES6的Tree Shaking； 
+- 支持Go、JavaScript的API； 
+- 支持TypeScript、JSX等语法编译；
+- 支持SourceMap； 
+- 支持代码压缩； 
+- 支持扩展其他插件；
+
+
+
+##### 特点
+
+- <span style="color: #ff0000">使用Go语言编写</span>的，可以直接转换成机器代码，而无需经过字节码；
+
+- ESBuild可以充分利用CPU的多内核，尽可能让它们饱和运行；
+
+- ESBuild的所有内容都是从零开始编写的，而不是使用第三方，所以从一开始就可以考虑各种性能问题。
+
+:whale: 机器码可以直接在操作系统运行，效率更高。
+
+:whale: JavaScript 需要解析为 AST，然后转化为字节码，再被 V8 做相应转化。
+
+
+
+### 使用Vite脚手架
+
+> 类似于 vue-cli，Vite 有自己的脚手架，实际搭建项目时，往往通过脚手架搭建，可以选择vue和react框架。
+
+写法一
+
+```elm
+npm init @vitejs/app
+```
+
+写法二
+
+```elm
+npm install @vitejs/create-app -g
+```
+
+```elm
+create-app xiang_mu_ming_chen
+```
+
+```elm
+npm install
+```
+
+
+
+## Vue3实现过渡动画
+
+### 代码片段插件推荐
+
+> 针对 vscode。插件名称为 `Vue VSCode Snippets`
+
+
+
+#### 生成vue骨架
+
+`vbase-css`
+
+
+
+### 快速撸码推荐 [Emmet](https://blog.csdn.net/qq_33744228/article/details/80910377)
+
+
+
+### 技巧
+
+```react
+import HeyDemo from './HeyDemo.vue'
+```
+
+:whale: 在 `vscode` 中，只有加上组件的后缀名，才能有代码提示、才能通过 `Ctrl` 进入资源位置。
+
+
+
+### scoped的问题
+
+> 在 vue3 中，会给子组件的根元素也添加上当前组件的区别属性 `data-v-xxx`，这会导致样式穿透，可能是个bug。
+
+```html
+<style scoped>
+<style>
+```
+
+
+
+### 非prop的属性继承
+
+> 传递给一个组件某个属性，但是<span style="color: #ff0000">该属性并没有定义对应的props或者emits时</span>，就称之为<span style="color: #a50">非Prop的Attribute</span>
+>
+> 常见有class、style、id属性。
+
+
+
+#### Attribute继承
+
+<span style="backGround: #efe0b9">父组件</span>
+
+```html
+<demo class="demo-content" />
+```
+
+<span style="backGround: #efe0b9">子组件</span>
+
+```html
+<template>
+  <div>...</div>
+</template>
+```
+
+<span style="backGround: #efe0b9">子组件部分转化为DOM</span>
+
+```html
+<div data-v-xxxx class="demo-content">...</div>
+```
+
+:ghost: 当组件有单个根节点时，非Prop的Attribute将自动添加到<span style="color: #ff0000">根节点</span>的Attribute中。
+
+
+
+#### 禁用Attribute继承
+
+> 通过配置可以使组件的根元素不去继承attribute。
+
+```react
+<template>
+  <div>
+    <h2 :class="$attrs.class"></h2>
+  </div>
+</template>
+
+export default {
+  inheritAttrs: false,
+}
+```
+
+:whale: 另外，可以通过 <span style="color: #a50">$attrs</span> 使子组件中的任意标签获取非props的属性。
+
+
+
+#### 绑定所有Attribute
+
+```html
+<template>
+  <div>
+    <h2 v-bind="$attrs"></h2>
+  </div>
+</template>
+```
+
+
+
+#### 多个根节点的Attribute
+
+> 多个根节点的attribute如果没有显示的绑定，会报警告，所以必须手动的指定要绑定到哪一个标签上：
+
+```html
+<template>
+  <div></div>
+  <div :class="$attrs.class"></div>
+</template>
+```
+
+
+
+### 记录自定义事件
+
+#### 数组格式
+
+> 在 vue3 中，发送自定义事件还需要使用 `emits` 配置项进行记录。
+
+```react
+<button @click="clickAdd">+</button>
+<button @click="clickAddN">+</button>
+
+export default {
+  emits: ["add", "addN"],
+  methdos: {
+    clickAdd() {
+      this.$emit("add");
+    },
+    clickAddN() {
+      this.$emit("addN", 10, 'hey');
+    }
+  }
+}
+```
+
+:turtle: 在父组件接收事件方面，和 vue2 没有区别。
+
+#### 对象格式
+
+> 会用的比较少，如果不能通过验证，代码也能执行，只是控制台会给出一个警告。
+
+```javascript
+// 对象写法的目的是为了参数验证，存在验证函数且通过时，需要返回true
+emits: {
+  add: null,
+  addN: (num, str) => {
+    if (num > 5) {
+      return true
+    }
+    return false;
+  }
+}
+```
+
+:whale: 仅传递一个参数时，往往将变量命名为 `payload`。
+
+
+
+## Vue3其它语法补充
+
+### 非父子组件的通信
+
+Provide/Inject； 
+
+- 无论层级结构有多深，父组件都可以为所有的子孙组件（不包括父组件自身）提供依赖。
+- 可以将依赖注入看作是 **long range props**，区别在于：
+- 父组件不需要知道哪些子组件使用到它，子组件不需要知道它来自哪里。
+- 真实开发中，往往用 Vuex。
+
+Mitt全局事件总线；
+
+- Vue2 中的事件总线的方法已经不能使用。
+
+
+
+### Provide和Inject基本使用
+
+<span style="backGround: #efe0b9">grandFather.vue</span>
+
+```react
+<father />
+
+export default {
+  provide: {
+    name: "cat",
+    age: 1,
+  }
+}
+```
+
+<span style="backGround: #efe0b9">father.vue</span>
+
+```react
+<son />
+```
+
+<span style="backGround: #efe0b9">son.vue</span>
+
+```react
+<h2>{{name}}-{{age}}</h2>
+
+export default {
+  inject: ["name", "age"]
+}
+```
+
+
+
+#### 返回组件实例中的信息
+
+```javascript
+export default {
+  data() {
+    return {
+      names: "cat",
+    }
+  },
+  provide() {
+    return {
+      name: this.names,
+      age: 1,
+    }
+  }
+}
+```
+
+:ghost: 需要返回实例中的信息时，不能将选项写为对象形式，因为此时它的 `this` 指向 window。
+
+
+
+#### 返回响应式的值
+
+```javascript
+import { computed } from 'vue';
+
+export default {
+  data() {
+    return {
+      numList: [1, 2],
+    }
+  },
+  provide() {
+    return {
+      length: computed(() => this.numList.length),
+    }
+  }
+}
+```
+
+:ghost: 正常使用时，`provide` 提供给后代的是一个固定值，不会随它的改变而更新，除非借助 `computed`。
+
+```html
+<h2>{{length.value}}</h2>
+```
+
+:star2: computed返回的是一个<span style="color: #ff0000">ref对象</span>，需要取出其中的<span style="color: #ff0000">value</span>来使用。
+
+
+
+### Mitt全局事件总线
+
+> Vue3从实例中移除了 $on、$off 和 $once 方法，但仍可以通过第三方的库去实现**全局事件总线**。
+
+**安装**
+
+```elm
+npm install mitt
+```
+
+**预定义**
+
+<span style="backGround: #efe0b9">utils/eventbus.js</span>
+
+方式一
+
+```javascript
+import mitt from 'mitt';
+
+const emitter = mitt();
+
+export default emitter;
+```
+
+方式二
+
+```javascript
+import mitt from 'mitt';
+
+export const emitter1 = mitt();
+export const emitter2 = mitt();
+```
+
+:whale: 如有需要，也可以定义多个实例。
+
+**使用**
+
+<span style="backGround: #efe0b9">me.vue</span>
+
+```javascript
+import emitter from './utils/eventbus';
+
+export default {
+  methods: {
+    handleCickButton() {
+      emitter.emit("dos", {name: "cat", age: 12});
+    }
+  }
+}
+```
+
+:ghost:  发射/接受的事件组件可以为上下关系也可以为兄弟关系。
+
+:ghost:  像这种事件名，可以新建一个文档用常量名来保存，使用时导入，防止冲突。
+
+<span style="backGround: #efe0b9">borther.vue</span>
+
+```javascript
+import emitter from './utils/eventbus';
+
+export default {
+  created() {
+    emitter.on("dos", (info) => {
+      console.log(info);
+    })
+    emitter.on("*", (type, e) => {
+      console.log(type, e);
+    })
+  }
+}
+```
+
+:ghost:  第二种写法表示接收任意事件，不管它的命名是什么，它的回调首参为类型。
+
+
+
+#### Mitt事件的取消
+
+> 一般在 `unmounted` 时取消监听。
+
+```javascript
+// 取消emitter中的所有监听
+emitter.all.clear()
+
+// 取消emitter中特定事件的特定回调
+function onFoo() {}
+emitter.on('foo', onFoo)   // 监听
+emitter.off('foo', onFoo)  // 取消监听
+```
+
+
+
+### 插槽
+
+#### 具名插槽
+
+<span style="backGround: #efe0b9">father.vue</span>
+
+```html
+<son>
+  <template v-slot:header>
+    <h1>title</h1>
+  </template>
+
+  <p>main content</p>
+
+  <template v-slot:footer>
+    <p>info</p>
+  </template>
+</son>
+```
+:star2: <span style="color: #ff0000">与已经废弃的vue2中使用的 `slot` 不同</span>，vue3 需要使用 <span style="color: #ff0000">`v-slot `</span> 且只能添加在 `<template>` 上。
+
+<span style="backGround: #efe0b9">son.vue</span>
+
+```react
+<header>
+  <slot name="header"></slot>
+</header>
+<main>
+  <slot></slot>
+</main>
+<footer>
+  <slot name="footer"></slot>
+</footer>
+```
+
+:whale: 不带 `name` 的 `<slot>` 默认为 `name="default"`
+
+
+
+#### 自定义具名插槽
+
+> 由父组件进行配置，控制插槽命名的方案雏形。
+
+<span style="backGround: #efe0b9">father.vue</span>
+
+```html
+<son :name="demoName">
+  <template v-slot:[demoName]>
+    <h1>title</h1>
+  </template>
+</son>
+
+data() {
+  return {
+    demoName: 'any'
+  }
+}
+```
+
+<span style="backGround: #efe0b9">son.vue</span>
+
+```react
+<header>
+  <slot :name="demoName"></slot>
+</header>
+
+props: {
+  demoName: {
+    type: String,
+    default: ''
+  }
+}
+```
+
+
+
+#### 具名插槽的缩写使用
+
+<span style="backGround: #efe0b9">father.vue</span>
+
+```html
+<son :name="demoName">
+  <template #[demoName]>
+    <h1>title</h1>
+  </template>
+  <template #footer>
+    <p>info</p>
+  </template>
+</son>
+```
+
+
+
+#### 作用域插槽
+
+> 可以解决编译作用域的问题，即能在父组件中获取到子组件中的”属性“（数据）。
+>
+>  vue2 中原本用的属性被废弃了。
+
+<span style="backGround: #efe0b9">father.vue</span>
+
+```react
+<son :names="names">
+  <template v-slot="slotProps">
+    <button>{{slotProps.item}}-{{slotProps.index}}</button>
+  </template>
+</son>
+
+data() {
+  return {
+    names: ['a', 'b']
+  }
+}
+```
+
+:turtle: 此处的 `slotProps` 可以看作一个对象，它拥有子组件对应插槽中传递上来的属性，对象的命名任意。
+
+ <span style="backGround: #efe0b9">son.vue</span>
+
+```react
+<template v-for="(item, index) in names" :key="item">
+  <slot :item="item" :index="index"></slot>
+</template>
+
+props: {
+  names: {
+    type: String,
+    default: () => []
+  }
+}
+```
+
+
+
+##### 具名插槽写法
+
+<span style="backGround: #efe0b9">father.vue</span>
+
+```react
+<son :names="names">
+  <template v-slot:demo="slotProps">
+    <button>{{slotProps.item}}-{{slotProps.index}}</button>
+  </template>
+</son>
+```
+
+:turtle: 此处的 `slotProps` 可以看作一个对象，它拥有子组件对应插槽中传递上来的属性，对象的命名任意。
+
+ <span style="backGround: #efe0b9">son.vue</span>
+
+```react
+<template v-for="(item, index) in names" :key="item">
+  <slot name="demo" :item="item" :index="index"></slot>
+</template>
+```
+
+
+
+##### 独占默认插槽的缩写
+
+<span style="backGround: #efe0b9">father.vue</span>
+
+```react
+<son :names="names" v-slot="slotProps">
+  <button>{{slotProps.item}}-{{slotProps.index}}</button>
+</son>
+```
+
+:turtle: 独占默认插槽指子组件中只用到了默认插槽，没有使用具名插槽。
+
+
+
+## 网络请求axios使用和封装
+
+
+
+### 动态组件
+
+> 通过该技术可以动态切换需要渲染的组件，可以代替简单场景的”动态路由“。
+
+```react
+<component :is="currentTab" />
+
+import Home from './Home.vue';
+import About from './About.vue';
+
+export default {
+  data() {
+    currentTab: 'home',
+  }
+}
+```
+
+<span style="color: #a50">:ghost: 属性is</span>对应的值可以是全局或局部注册的组件。
+
+#### 动态组件的属性传递
+
+<span style="backGround: #efe0b9">father.vue</span>
+
+```html
+<component :is="currentTab"
+           :age="12"
+           @clickSon="clickSon" />
+```
+
+ <span style="backGround: #efe0b9">son.vue</span>
+
+```javascript
+props: ['age']
+```
+
+
+
+### keep-alive
+
+> 动态组件在切换时，会导致组件（及内部状态）的销毁，可以用 `keep-alive` 包裹组件以实现缓存。
+
+```html
+<keep-alive>
+  <component :is="currentTab" />
+</keep-alive>
+```
+
+:whale: 在动态路由中经常使用到这个技术。
+
+
+
+#### keep-alive属性
+
+| 属性名  | 格式                 | 说明                                                   |
+| ------- | -------------------- | ------------------------------------------------------ |
+| include | str\| RegExp \| arr  | 只有名称匹配的组件会被缓存                             |
+| exclude | str \| RegExp \| arr | 名称匹配的组件会不会被缓存                             |
+| max     | num\| str            | 最多可以缓存多少组件实例，达到后销毁最近没访问到的实例 |
+
+```html
+<keep-alive include="a, b">
+  <component :is="currentTab" />
+</keep-alive>
+
+<keep-alive :include="/a|b/">
+  <component :is="currentTab" />
+</keep-alive>
+
+<keep-alive :include="['a', 'b']">
+  <component :is="currentTab" />
+</keep-alive>
+```
+
+:whale: 该属性会去匹配每个组件实例的 `name` 选项。
+
+
+
+### 实现异步组件
+
+#### webpack的代码分包
+
+##### 默认打包
+
+- <span style="color: #ff0000">默认情况下</span>，在构建整个组件树的过程中，因为组件和组件之间是通过模块化直接依赖的，那么webpack在打包时就会<span style="color: #ff0000">将这些组件模块打包到一起</span>（比如都放到一个叫做app.js的文件中）；
+
+- 但随着项目的不断庞大，app.js文件的内容过大，会造成<span style="color: #ff0000">首屏的渲染速度变慢</span>；
+
+
+
+##### 代码的分包
+
+- 对于一些不需要立即使用的组件，我可以单独对它们进行拆分，拆分成一些小的代码块 chunk.js； 
+
+- 这些 chunk.js 会<span style="color: #ff0000">在需要时才从服务器加载下来</span>，并且运行代码，显示对应的内容；
+
+
+
+##### 实现分包
+
+```javascript
+import("./utils/math").then(({ sum }) => {
+  console.log(sum(20, 30));
+})
+```
+
+:whale: 通过 `import()` 的语法能够实现分包，它的返回值为一个期约。
+
+
+
+#### vue中实现异步组件
+
+> 可以通过 vue 提供的函数实现异步组件。实际开发通常不使用这种方式，而是在路由配置。
+
+写法一
+
+```javascript
+import { defineAsyncComponent } from 'vue';
+const Home = defineAsyncComponent(() => import("./Home.vue"));
+
+export default {
+  components: {
+    Home,
+  }
+}
+```
+
+:whale: 接受工厂函数，需要从中返回一个期约对象。
+
+写法二
+
+```javascript
+import { defineAsyncComponent } from 'vue';
+const Home = defineAsyncComponent({
+  // 工厂函数
+  loader: () => import("./Home.vue"),
+  // 等待加载过程展示的组件
+  loadingComponent: Loading,
+  // 加载失败展示的组件
+  errorComponent: Error,
+  // 显示 loadingComponent 对应组件前的延迟
+  delay: 2000,
+  // 如果加载组件的时间超出了设定值，将显示错误组件
+  timeout: 0,
+  // 定义组件是否可挂起
+  suspensible: true,
+});
+
+export default {
+  components: {
+    Home,
+  }
+}
+```
+
+:whale: 接受一个对象类型，对异步函数进行配置。
+
+
+
+#### Suspense
+
+> 为一个内置的全局组件，通过插槽决定备用渲染的组件。
+>
+> 实验特性，可能API在后续被修改了。
+
+```html
+<suspense>
+  <!-- 如果default可以显示，那么显示default的内容 -->  
+  <template #default>
+    <home/>
+  </template>
+  <!-- 如果default无法显示，那么会显示fallback插槽的内容 -->  
+  <template #fallback>
+    <loading/>
+  </template>
+</suspense>
+```
+
+
+
+### $refs
+
+> 使用 vue 时，不推荐进行 DOM 操作。它提供了 `$refs` 供我们获取元素对象或子组件实例。
+
+| 相似API   | 说明                 |
+| --------- | -------------------- |
+| $el       | 获取组件实例的根元素 |
+| $parent   | 获取父组件实例       |
+| $root     | 获取根组件实例       |
+| $children | Vue3已移除           |
+
+
+
+### v-model组件
+
+#### 默认情况
+
+```react
+<ChildComponent v-model="pageTitle" />
+
+<!-- 相当于 2.X -->
+<ChildComponent :value="pageTitle" @input="pageTitle = $event" />
+
+<!-- 相当于 3.X -->
+<ChildComponent :modelValue="pageTitle" @update:modelValue="pageTitle = $event" />
+```
+
+#### 更改model名称
+
+```react
+<ChildComponent v-model:title="pageTitle" />
+
+<!-- 是以下的简写: -->
+
+<ChildComponent :title="pageTitle" @update:title="pageTitle = $event" />
+```
+
+#### 使用多个v-model
+
+```react
+<ChildComponent v-model:title="pageTitle" v-model:content="pageContent" />
+
+<!-- 是以下的简写： -->
+
+<ChildComponent
+  :title="pageTitle" @update:title="pageTitle = $event"
+  :content="pageContent" @update:content="pageContent = $event"
+/>
+```
+
+#### 子组件的配合
+
+写法一
+
+```react
+<input :value="modelValue" @input="btnClick">
+
+emits: ["update:modelValue"],
+props: {
+  modelValue: String
+},
+methods: {
+  btnClick(event) {
+    this.$emit("update:modelValue", event.target.value)
+  },
+}
+```
+
+写法二
+
+```react
+<input v-model="aValue">
+
+emits: ["update:modelValue"],
+props: {
+  modelValue: String
+},
+computed: {
+  aValue: {
+    set(value) {
+      this.$emit("update:modelValue", value)
+    },
+    get() {
+      return this.modelValue;
+    }
+  }
+}
+```
 
