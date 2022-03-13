@@ -1362,7 +1362,7 @@ module.exports = {
 
 ### 单页面富应用阶段
 
-- SPA 最主要的特点就是在前后端分离的基础上加了一层前端路由。
+- SPA 最主要的特点就是在前后端分离的基础上加了一层<span style="color: #ff0000">前端路由</span>。
   - 改变 URL，但是页面不进行整体刷新。
 
 ![单页面富应用阶段](./img/单页面富应用阶段.jpg)
@@ -1375,7 +1375,7 @@ module.exports = {
 
 1. 修改hash
 
-> 若更改 url 的 `hash` ，网页将不会刷新。在路由的映射关系中找到相应的组件后，取得组件并渲染到页面。
+> 若更改 url 的 `hash` ，<span style="color: #ff0000">网页将不会刷新</span>。在路由的映射关系中找到相应的组件后，取得组件并渲染到页面。
 
 ```react
 /* js中或控制台 */
@@ -1390,6 +1390,7 @@ location.hash = 'xxx'
 | history.forward()                   | 前进一页                                  | 无    |
 | history.back()                      | 后退一页                                  | 无    |
 | history.pushState({}, "", "xxx")    | 进入新的 URL 并以入栈形式新建一条历史记录 | 栗子  |
+| history.popState()                  | 路径的回退                                | 待补  |
 | history.replaceState({}, "", "xxx") | 替换当前的 URL，替换该状态的历史记录      | 栗子  |
 
 :herb: 对应红宝石书 BOM 一章的内容 P379

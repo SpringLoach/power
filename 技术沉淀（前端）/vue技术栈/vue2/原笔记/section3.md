@@ -301,7 +301,7 @@ const store = new Vuex.Store({
 export default store
 ```
 
-:palm_tree: 单一状态树：将状态信息全部保存在一个 Store 对象中，便于后期的管理和维护。
+:palm_tree: 单一状态树：将状态信息<span style="color: #ff0000">全部保存在一个 Store 对象中</span>，便于后期的管理和维护。
 
 ```react
 /* src 下的 main.js */
