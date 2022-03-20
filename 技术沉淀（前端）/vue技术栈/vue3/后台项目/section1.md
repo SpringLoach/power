@@ -537,6 +537,27 @@ npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
 
 :turtle: 后续提交代码时如果验证不能通过，本次提交会失败。 
 
+3.1如果第三步的命令不能生效（window10），可以将它拆为以下两步。
+
+```
+npx husky add .husky/commit-msg
+```
+
+<span style="backGround: #efe0b9">项目/.husky/commit-msg</span>
+
+```
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx --no-install commitlint --edit $1
+```
+
+
+
+
+
+
+
 
 
 ## 二. 第三方库集成
@@ -816,7 +837,7 @@ app.mount('#app')
 
 
 
-#### 2.4.2. 局部引入
+#### 2.4.2. 局部引入（手动）
 
 也就是在开发中用到某个组件对某个组件进行引入：
 
@@ -972,4 +993,119 @@ app.mount('#app')
 ```
 
 
+
+#### 2.4.3 局部引入（自动）
+
+> 推荐这一个版本，局部引入（手动）的样式/组件路径发生了一点变化，不是一个好方案。
+
+```elm
+npm install -D unplugin-vue-components unplugin-auto-import
+```
+
+<span style="backGround: #efe0b9">项目/vue.config.js</span>
+
+```javascript
+const AutoImport = require('unplugin-auto-import/webpack')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+
+module.exports = {
+  configureWebpack: {
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()]
+      })
+    ]
+  }
+}
+```
+
+
+
+### 2.5. axios集成
+
+安装axios：
+
+```shell
+npm install axios
+```
+
+封装axios：
+
+```ts
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { Result } from './types'
+import { useUserStore } from '/@/store/modules/user'
+
+class HYRequest {
+  private instance: AxiosInstance
+
+  private readonly options: AxiosRequestConfig
+
+  constructor(options: AxiosRequestConfig) {
+    this.options = options
+    this.instance = axios.create(options)
+
+    this.instance.interceptors.request.use(
+      (config) => {
+        const token = useUserStore().getToken
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`
+        }
+        return config
+      },
+      (err) => {
+        return err
+      }
+    )
+
+    this.instance.interceptors.response.use(
+      (res) => {
+        // 拦截响应的数据
+        if (res.data.code === 0) {
+          return res.data.data
+        }
+        return res.data
+      },
+      (err) => {
+        return err
+      }
+    )
+  }
+
+  request<T = any>(config: AxiosRequestConfig): Promise<T> {
+    return new Promise((resolve, reject) => {
+      this.instance
+        .request<any, AxiosResponse<Result<T>>>(config)
+        .then((res) => {
+          resolve((res as unknown) as Promise<T>)
+        })
+        .catch((err) => {
+          reject(err)
+        })
+    })
+  }
+
+  get<T = any>(config: AxiosRequestConfig): Promise<T> {
+    return this.request({ ...config, method: 'GET' })
+  }
+
+  post<T = any>(config: AxiosRequestConfig): Promise<T> {
+    return this.request({ ...config, method: 'POST' })
+  }
+
+  patch<T = any>(config: AxiosRequestConfig): Promise<T> {
+    return this.request({ ...config, method: 'PATCH' })
+  }
+
+  delete<T = any>(config: AxiosRequestConfig): Promise<T> {
+    return this.request({ ...config, method: 'DELETE' })
+  }
+}
+
+export default HYRequest
+```
 
