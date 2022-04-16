@@ -330,9 +330,9 @@ setup() {
 
 
 
-## 使用setup特性
+## 基础图像
 
-### 版本更新
+### setup特性的版本更新
 
 由于当初特性刚出，需要较新的 vue 版本上才能使用。
 
@@ -349,6 +349,16 @@ npm install @vue/compiler-sfc
 
 
 ### 示例
+
+```css
+- commom
+  + echart
+    - src
+      + base-echart.vue
+    - index.ts
+```
+
+
 
 <span style="backGround: #efe0b9">commom/echart/src/base-echart.vue</span>
 
@@ -391,7 +401,41 @@ onMounted(() => {
 
 :european_castle: 在 <span style="color: #a50">onMounted</span> 中才能确保获取到 DOM。
 
-:trident: 仅作示例，离实现还缺了一点东西。
+<span style="backGround: #efe0b9">commom/echart/hooks/useEchart.ts</span>
+
+```react
+import * as echarts from 'echarts'
+
+import chinaMapData from '../data/china.json'
+
+// 使用特殊的图像时，需要仅一次的注册
+echarts.registerMap('china', chinaMapData)
+
+export default function (el: HTMLElement) {
+  // 暴露出初始化的方法
+  const echartInstance = echarts.init(el)
+
+  // 暴露出更改配置的方法
+  const setOptions = (options: echarts.EChartsOption) => {
+    echartInstance.setOption(options)
+  }
+  
+  // 暴露出调整图像大小的方法
+  const updateSize = () => {
+    echartInstance.resize()
+  }
+
+  window.addEventListener('resize', () => {
+    echartInstance.resize()
+  })
+
+  return {
+    echartInstance,
+    setOptions,
+    updateSize
+  }
+}
+```
 
 
 
@@ -443,6 +487,147 @@ withDefaults(
 )
 </script>
 ```
+
+
+
+## 封装
+
+### 封装中间层
+
+> 配置基本一致，用于复用；通过自定义属性，动态决定部分配置。
+
+```css
+- components
+  + page-echarts
+    - src                    # 不同的图像类型
+      + pie-echart.vue
+      + bar-echart.vue
+    - types
+      + index.ts
+    - index.ts               # 统一导出
+```
+
+<span style="backGround: #efe0b9">components/page-echarts/src/pie-echart.vue</span>
+
+```html
+<template>
+  <div class="pie-echart">
+    <base-echart :options="options"></base-echart>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { defineProps, computed } from 'vue'
+import BaseEchart from '@/commom/echart'
+import { IDataType } from '../types'
+
+const props = defineProps<{
+  pieData: IDataType[]
+}>()
+
+const options = computed(() => {
+  return {
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      orient: 'horizontal',
+      left: 'left'
+    },
+    series: [
+      {
+        name: '分类数据',
+        type: 'pie',
+        radius: '50%',
+        data: props.pieData,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  }
+})
+</script>
+```
+
+<span style="backGround: #efe0b9">components/page-echarts/types/index.ts</span>
+
+```javascript
+export interface IDataType {
+  name: string
+  value: any
+}
+```
+
+<span style="backGround: #efe0b9">components/page-echarts/index.ts</span>
+
+```javascript
+import PieEchart from './src/pie-echart.vue'
+import RoseEchart from './src/rose-echart.vue'
+
+export { PieEchart, RoseEchart }
+```
+
+### 使用
+
+<span style="backGround: #efe0b9">views/main/analysis/dashboard/dashboard.vue</span>
+
+```react
+<template>
+  <div class="dashboard">
+    <el-row :gutter="10">
+      <el-col :span="7">
+        <hd-card title="分类商品数量(饼图)">
+          <pie-echart :pieData="categoryGoodsCount"></pie-echart>
+        </hd-card>
+      </el-col>
+      ...
+    </el-row>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, computed } from 'vue'
+import { useStore } from '@/store'
+
+import HdCard from '@/commom/card'
+import {
+  PieEchart
+} from '@/components/page-echarts'
+
+export default defineComponent({
+  name: 'dashboard',
+  components: {
+    HdCard,
+    PieEchart,
+  },
+  setup() {
+    const store = useStore()
+    // 请求数据
+    store.dispatch('dashboard/getDashboardDataAction')
+
+    // 获取数据
+    const categoryGoodsCount = computed(() => {
+      return store.state.dashboard.categoryGoodsCount.map((item: any) => {
+        return { name: item.name, value: item.goodsCount }
+      })
+    })
+
+    return { categoryGoodsCount }
+  }
+})
+</script>
+```
+
+:european_castle: 需要将请求到的配置数据，传递给子组件；由于数据在 vuex 中，可以使用 computed 处理，将最新数据传递给子组件。
+
+
+
+
 
 
 
