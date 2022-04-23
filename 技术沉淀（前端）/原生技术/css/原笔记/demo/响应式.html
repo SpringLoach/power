@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewpoet" content="width=device-width, initial-scale=1.0">
+<title>响应式</title>
+<style type="text/css">
+/* 更改浏览器默认设置；有说法在复杂的页面这样会带来负荷 */
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+/* 针对手机 */
+[class*="col-"] {
+    width: 100%;
+}
+
+
+/* 针对平板电脑, 顺序不能乱 */
+@media only screen and (min-width: 600px) {
+.col-s-1 {width: 8.33%;}
+.col-s-2 {width: 16.66%;}
+.col-s-3 {width: 25%;}
+.col-s-4 {width: 33.33%;}
+.col-s-5 {width: 41.66%;}
+.col-s-6 {width: 50%;}
+.col-s-7 {width: 58.33%;}
+.col-s-8 {width: 66.66%;}
+.col-s-9 {width: 75%;}
+.col-s-10 {width: 83.33%;}
+.col-s-11 {width: 91.66%;}
+.col-s-12 {width: 100%;}
+}
+/* 针对桌面 */
+@media only screen and (min-width: 768px) {
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+.row::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+/*图片*/
+img {
+    width: 100%;
+    height: auto;
+}
+/*一些修饰的样式*/
+html {
+    font-family: "Lucida Sans", sans-serif;
+}
+.header {
+    background-color: slategrey;
+    color: white;
+    padding: 15px;
+}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    background-color: #33b5e5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    color: #ffffff;
+    margin-bottom: 7px;
+    padding: 8px;
+}
+.menu li:hover {
+    background-color: #0099cc;
+}
+.aside {
+    background-color: #33b5e5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    padding: 15px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+.footer {
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    background-color: #0099cc;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+</style>
+</head>
+
+<body>
+<div class="header">
+<h1>犬类</h1>
+</div>
+<div class="row">
+    <div class="col-3 col-s-3">
+        <ul class="menu">
+            <li>阿拉斯加</li>
+            <li>中华田园犬</li>
+            <li>金毛</li>
+            <li>萨摩耶</li>
+        </ul>
+    </div>
+    <div class="col-6 col-s-9">
+        <h1>萨摩耶</h1>
+        <img class="img" alt="可爱的萨摩耶" src="萨摩耶.jpg">
+        <p>萨摩耶犬，原是西伯利亚的原住民萨摩耶族培育出的犬种，一岁前调皮、灵动。它机警、强壮、灵活、美丽、高贵优雅、乖巧可爱，有着非常引人注目的外表，有“微笑天使”的称号，也有着“微笑天使面孔，捣蛋魔鬼内心”之称。</p>
+        <br>
+        <p>萨摩耶犬很聪明，学习东西很快，但程度也有很大差异，要注意不同情况区别对待。它的性情温和，对主人忠诚，适应性强。警惕，充满活力，待人友善，不保守，不胆怯，不多疑，只是进攻性不强。</p>
+    </div>
+    <div class="col-3 col-s-12">
+        <div class="aside">
+        <h2>饲养方法</h2>
+        <br>
+        <p>人和萨摩耶犬感情上的联系是人和萨摩耶犬共同生活结为伴侣的前提条件。因此，主人与萨摩耶犬要多接触，对它多关心爱护，要友好相待。</p>
+        </div>
+        <div class="aside">
+        <h2>品系颜色</h2> 
+        <br>
+        <p>萨摩耶犬的颜色为白色；部分带有很浅的浅棕色、奶酪色、浅棕色。此外其他颜色都属于失格。世界上曾出现过一只灰白色萨摩，FCI承认他是具有纯种血统萨摩耶基因的返祖萨摩，黑色萨摩耶犬极为罕见。</p>
+        </div>
+        <div class="aside">
+        <h2>外形特征</h2>
+        <br>
+        <p>直立的耳朵很厚，呈三角形，尖端略圆。两耳分的较开。眼睛颜色深为佳，两眼凹陷，间距大，杏仁形，下眼睑向耳基部倾斜。鼻子颜色有黑色、棕色、肝褐色，鼻的颜色有时随年龄和气候改变。嘴唇多数是黑色，嘴角上翘。</p>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <p>Drunk to see the sword, dream blowing the horn camp.</p>
+</div>
+</body>
+</html>
