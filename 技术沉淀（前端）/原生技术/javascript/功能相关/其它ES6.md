@@ -147,3 +147,17 @@ async completeGift(item, index) {
 
 
 
+## 展开对象
+
+
+
+### 添加额外属性
+
+```react
+form = {...form, isSelect: false};      // 额外添加属性
+
+form = {...form, id: form.uid};         // 拷贝自身属性
+```
+
+
+
