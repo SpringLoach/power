@@ -262,3 +262,30 @@ const errorHandler = (error) => {
 
 :whale: 退出登录时删除 token，在刷新页面后，会被路由守卫拦截到登录页。
 
+
+
+### 头部全局添加字段
+
+```javascript
+import VueCookie from 'vue-cookie';
+import { baseURL } from '@/constants/base';
+
+instance.interceptors.request.use((config) => {
+  const token = VueCookie.get('authorization');
+  const store_id = VueCookie.get('store_id');
+  const type = VueCookie.get('type');
+  if (parseInt(type, 10) === 2 && store_id) {
+    config.headers['store-id'] = store_id;
+  }
+  if (token != null) {
+    config.headers.authorization = token;
+    config.headers.type = 'unioncenter'; // 类型 商户
+  } else {
+    window.location.href = `${baseURL}/set-token`;
+  }
+}, ...);
+```
+
+>  代码中的 instance 为 axios 实例；上面的三个缓存值，在登录时会写入进去；
+>
+> 在没有 token 的情况下，调用任何接口都会去set-token页面。

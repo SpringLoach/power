@@ -1,7 +1,5 @@
 # Composition API
 
-
-
 ## 编写组件对比
 
 在vue2中，是使用 **Options API** 进行组件的编写，它包括data、methods、生命周期钩子等。

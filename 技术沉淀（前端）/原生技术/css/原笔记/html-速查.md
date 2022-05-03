@@ -547,8 +547,58 @@ ondragover | 元素在有效拖放目标上拖动时
 ondragstart | 拖动操作开端
 ondrop | 被拖元素正在被拖放时
 
+ 
 
-​    
-​    
-​    
-​    
+## 其它
+
+### 脚本 的 defer 和 async
+
+> html5 中的新属性
+
+1.默认引用 script:
+
+```html
+<script src="script.js"></script>
+```
+
+当浏览器遇到 script 标签时，文档（HTML）的解析将停止，并立即下载并执行脚本，脚本执行完毕后再继续解析文档。
+
+2.async模式 
+
+```html
+<script async src="script.js"></script>
+```
+
+当浏览器遇到 script 标签时，文档的解析不会停止，将由其他线程下载脚本。脚本下载完成后开始执行脚本，此时文档将停止解析，直到脚本执行完毕。
+
+3.defer模式
+
+```html
+<script defer src="myscript.js"></script>
+```
+
+当浏览器遇到 script 标签时，文档的解析不会停止，将由其他线程下载脚本。待到文档解析完成，脚本才会执行。
+
+
+
+
+![脚本执行](./img/脚本执行)
+
+蓝色线代表网络读取，红色线代表执行时间，这俩都是针对脚本的；绿色线代表 HTML 解析。
+
+
+
+#### 总结
+
+<span style="color: #f7534f;font-weight:600">原生</span> 浏览器在遇到script标签的时候，文档的解析会停止，不再构建document，有时打开一个网页上会出现空白一段时间，会给用户很不好的体验。
+
+<span style="color: #f7534f;font-weight:600">defer</span> 异步加载脚本，等到整个页面正常渲染结束，才会执行；
+
+<span style="color: #f7534f;font-weight:600">async</span> 异步加载脚本，一旦下载完成会立即执行，此时会中断渲染；
+
+:ghost: 如果有多个 defer 脚本，会按照它们在页面出现的顺序加载；而多个 async 脚本是<span style="color: #ff0000">不能保证加载顺序</span>的（指script 标签在页面中的顺序）
+
+:whale: 如果脚本并不关心页面中的DOM元素（文档是否解析完毕），并且也不会依赖/被依赖其他脚本，可以考虑 **async**。
+
+
+

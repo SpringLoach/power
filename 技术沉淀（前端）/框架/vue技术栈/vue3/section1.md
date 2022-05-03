@@ -261,6 +261,16 @@ for(const key in methods) {
 
 这在 Vue2 中时不允许的。
 
+### 异-filter
+
+在 Vue3 中已经不支持，建议使用计算属性/全局方法替代。
+
+```react
+formatPrice(price) {
+  return "￥" + price;
+}
+```
+
 
 
 ### 声明式VS命令式
@@ -1638,6 +1648,8 @@ devServer: {
 
 
 #### 解决跨域的原理
+
+> 将域名发送给本地的服务器（启动vue项目的服务,loclahost:8080），再由本地的服务器去请求真正的服务器。
 
 ![proxy原理](./img/proxy原理.png)
 

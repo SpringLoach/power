@@ -151,7 +151,6 @@ async getInfo() {
       storeId: this.orderData.storeId || ''
     })
     if (res.data.code == 200) {
-      console.log('获取门店收件人信息', res.data.data)
       this.refundMerchantObj = res.data.data || {}
     } else {
       uni.showToast({ title: res.data.msg, icon: 'none' })
@@ -163,6 +162,24 @@ async getInfo() {
   }
 },
 ```
+
+
+
+```javascript
+async getList() {
+  this.loading = true;
+  try {
+    const res = await goodsList(this.pager) || {};
+    this.list = res.records || [];
+  } catch (err) {
+    window.console.error(err);
+  } finally {
+    this.loading = false;
+  }
+},
+```
+
+
 
 
 
