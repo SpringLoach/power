@@ -1,4 +1,8 @@
-## 将某个元素下载为PDF（htmlToPdf）
+## 将某个元素下载为PDF
+
+> 需要用到的第三方库文档： [html2canvas](https://html2canvas.hertzen.com/documentation) 和 [jsPDF](http://raw.githack.com/MrRio/jsPDF/master/docs/jsPDF.html#addPage)，github上也有一些栗子。
+
+
 
 1. 拷贝文件 `htmlToPdf.js` 
 2. 引入到目标组件，（当点击按钮时）执行相应逻辑
@@ -138,3 +142,14 @@ Vue.use(Print);
 <div id="resume">我要被打印啦</div>
 ```
 
+
+
+## 小程序海报插件
+
+> 原生小程序插件见 [Github](https://github.com/jasondu/wxa-plugin-canvas)。实现思路见[掘金](https://juejin.cn/post/6844903663840788493)
+
+> uni-app 相关[插件](https://ext.dcloud.net.cn/plugin?id=586)
+
+
+
+其它资料：动态[计算](https://www.jb51.net/article/152438.htm)海报在页面的宽高
