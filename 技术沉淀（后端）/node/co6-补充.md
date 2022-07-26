@@ -369,3 +369,38 @@ app.listen(8080, () => {
 
 
 
+## postman
+
+### 环境配置接口
+
+大概在Node课程的18集？ 1:50:30
+
+
+
+### 全局token
+
+**设置**
+
+> 在登录接口的 Tests 添加代码：
+
+```javascript
+const res = pm.response.json();
+pm.globals.set("token", res.token);
+```
+
+<span style="color: #f7534f;font-weight:600">pm</span> 是一个全局对象，是 `postman` 的缩写
+
+<span style="color: #f7534f;font-weight:600">pm.response</span> 可以拿到本次响应的结果
+
+<span style="color: #f7534f;font-weight:600">pm.globals</span> 里面可以设置一些全局属性
+
+**获取**
+
+> 在需要添加 Token 的地方，一般是 Authorization 中设置该变量。
+
+```javascript
+{{token}}
+```
+
+
+

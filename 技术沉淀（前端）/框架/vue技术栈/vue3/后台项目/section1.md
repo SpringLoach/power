@@ -730,7 +730,7 @@ createApp(App).use(router).mount('#app')
 
 ```vue
 <template>
-  <div></div>
+  <div class=""></div>
 </template>
 
 <script lang="ts">
