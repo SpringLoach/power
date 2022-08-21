@@ -289,3 +289,75 @@ instance.interceptors.request.use((config) => {
 >  代码中的 instance 为 axios 实例；上面的三个缓存值，在登录时会写入进去；
 >
 > 在没有 token 的情况下，调用任何接口都会去set-token页面。
+
+
+
+### 上传excel到服务器
+
+> 图片等资源应该也适用。
+
+![image-20220618173130414](.\img\上传资源)
+
+```html
+<!DOCTYPE html>
+<html>
+<body>
+
+<input id="input" type="file" />
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+document.getElementById("input").addEventListener("change",function (e) {
+  console.log("change", e.target.files[0]);
+  const excelFilt = e.target.files[0]
+  const form = new FormData(); // FormData 对象
+  form.append('file', excelFilt);
+  console.log(form)
+  
+  axios.post('/user', form)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+});
+
+</script>
+
+</body>
+</html>
+```
+
+
+
+### 下载excel
+
+```javascript
+export async function handleExport(config, fileName) {
+  // 下载
+  exportFile(config).then(res => {
+    const href = window.URL.createObjectURL(new Blob([res])) // 创建下载的链接
+    const link = document.createElement('a')
+    link.style.display = 'none'
+    link.href = href
+    link.download = fileName + '.xlsx' // 将作为文件名称
+    document.body.appendChild(link)
+    link.click()
+    // 下载完成移除元素
+    document.body.removeChild(link)
+    // 释放掉blob对象
+    window.URL.revokeObjectURL(href)
+  }).catch(err => {
+    console.log(err.response.data.message)
+  })
+}
+```
+
+window.URL.createObjectURL介绍 https://www.cnblogs.com/mark5/p/13321460.html?ivk_sa=1024320u
+
+
+
+
+

@@ -291,7 +291,7 @@ export default class App extends Component {
 
 // 首次渲染：constructor -> render -> componentDidMount
 
-// 点击按钮：render -> componentDidMount
+// 点击按钮：render -> componentDidUpdate
 ```
 
 :whale: 动态渲染组件时， 能够触发 componentWillUnmount 钩子；

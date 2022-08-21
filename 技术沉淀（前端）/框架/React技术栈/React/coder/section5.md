@@ -635,11 +635,79 @@ export default class About extends PureComponent {
 
 
 
+### 路由懒加载
+
+**路由映射**
+
+```react
+import React from 'react';
+
+// import Home from '@/pages/home';
+const Home = React.lazy(() => import("@/pages/home"));
+
+const routes = [
+  // ...
+]
+
+export default routes;
+```
+
+**根组件处理**
+
+```react
+import React, { Suspense } from 'react';
+import { renderRoutes } from 'react-router-config';
+
+export default memo(function App() {
+  return (
+    <Suspense fallback={<div>page loading</div>}>
+      {renderRoutes(routes)}
+    </Suspense>
+  )
+})
+```
+
+:octopus: 使用懒加载时，要求根路由的外层必须用 <span style="color: #ff0000">Suspense</span> 组件包裹，用于提供应急组件，在组件未加载前展示；
+
+:ghost: 该组件通过 <span style="color: #a50">fallback</span> 属性接收一个组件。
 
 
 
+### 路由重定向
 
+```react
+import { Redirect } from "react-router-dom";
 
+// ...
+import Home from '@/pages/home';
 
+const routes = [
+  {
+    path: "/",
+    exact: true,
+    render: () => (
+      <Redirect to="/discover"/>
+    )
+  },
+  {
+    path: "/discover",
+    component: HYDiscover,
+    routes: [
+      {
+        path: "/discover",
+        exact: true,
+        render: () => (
+          <Redirect to="/discover/recommend"/>
+        )
+      },
+      {
+        path: "/discover/recommend",
+        component: HYRecommend
+      }
+    ]
+  }
+]
+```
 
+这个例子中，对于 `/`，会直接处理为 `/discover/recommend`。
 
