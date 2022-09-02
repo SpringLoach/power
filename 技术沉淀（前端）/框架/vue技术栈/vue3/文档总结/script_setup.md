@@ -69,7 +69,7 @@ const count = ref(0)
 </template>
 ```
 
-:ghost: 响应式状态需要使用[响应式 APIs](https://v3.cn.vuejs.org/api/basic-reactivity.html) 来创建，在模板中使用的时候会<span style="color: #ff0000">自动解包</span>。
+:ghost: 响应式状态需要明确使用[响应式 API](https://cn.vuejs.org/api/reactivity-core.html) 来创建，ref 在模板中使用的时候会<span style="color: #ff0000">自动解包</span>。
 
 
 
@@ -105,17 +105,11 @@ import Bar from './Bar.vue'
 </template>
 ```
 
-:ghost: 由于组件被引用为变量（而非字符串键）来注册的，在 `script setup` 中要使用动态组件的时候，就应该使用动态的 `:is` 来绑定。
+:ghost: 由于组件是通过变量引用（而不是基于字符串组件名）注册，在 `script setup` 中要使用动态组件的时候，应该使用动态的 `:is` 来绑定。
 
 
 
 #### 递归组件
-
-<span style="backGround: #efe0b9">FooBar.vue</span>
-
-```vue
-<FooBar/>
-```
 
 :ghost: 一个单文件组件可以通过它的文件名被其自己所引用。
 

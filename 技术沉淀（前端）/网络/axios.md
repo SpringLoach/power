@@ -124,7 +124,49 @@ qs.stringify({ a: ['b', 'c'] }, { arrayFormat: 'repeat' })
 
 
 
+### 传中文参数
+
+```
+可以通过 post 请求，body 传参的方式来实现
+```
+
+也可以通过 encodeURIComponent 编码，需要后端解码配合。
+
+
+
 ## 业务
+
+### 常见操作
+
+| 位置     | 操作                             | 说明                         |
+| -------- | -------------------------------- | ---------------------------- |
+| 基础配置 | 封装的位置为 utils/request.js    | 个人喜欢把配置归属到 api     |
+| 基础配置 | 设置 baseURL                     | 直接使用环境变量中的值       |
+| 基础配置 | 直接设置默认的头部字段           | 一般为 json 格式             |
+| 请求拦截 | 防重：针对 post / put 的请求类型 | 借助缓存拦截短时间的重复提交 |
+| 响应拦截 | 对于二进制数据，直接返回         | 正常数据通过解决期约返回     |
+| 响应拦截 | 处理状态码：401 重新登录         |                              |
+
+
+
+### baseURL & 默认头部
+
+- baseURL 直接使用环境变量中的值
+
+- 直接设置默认的头部字段为  json 格式
+
+```javascript
+import axios from 'axios'
+
+axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
+// 创建axios实例
+const service = axios.create({
+  baseURL: import.meta.env.VITE_APP_BASE_API,
+  timeout: 10000
+})
+```
+
+>  这里以 vite 作为例子展示取环境变量中的值。
 
 
 
@@ -289,6 +331,41 @@ instance.interceptors.request.use((config) => {
 >  代码中的 instance 为 axios 实例；上面的三个缓存值，在登录时会写入进去；
 >
 > 在没有 token 的情况下，调用任何接口都会去set-token页面。
+
+
+
+### 防止短时间重复请求
+
+> 请求拦截中添加如下代码
+
+```javascript
+// 配置了需要防重，且为 post / put 类型的请求进行校验
+if (!isRepeatSubmit && (config.method === 'post' || config.method === 'put')) {
+  const requestObj = {
+    url: config.url,
+    data: typeof config.data === 'object' ? JSON.stringify(config.data) : config.data,
+    time: new Date().getTime()
+  }
+  const sessionObj = cache.session.getJSON('sessionObj')
+  if (sessionObj === undefined || sessionObj === null || sessionObj === '') {
+    cache.session.setJSON('sessionObj', requestObj)
+  } else {
+    const s_url = sessionObj.url;                // 请求地址
+    const s_data = sessionObj.data;              // 请求数据
+    const s_time = sessionObj.time;              // 请求时间
+    const interval = 1000;                       // 间隔时间(ms)，小于此时间视为重复提交
+    if (s_data === requestObj.data && requestObj.time - s_time < interval && s_url === requestObj.url) {
+      const message = '数据正在处理，请勿重复提交';
+      console.warn(`[${s_url}]: ` + message)
+      return Promise.reject(new Error(message))
+    } else {
+      cache.session.setJSON('sessionObj', requestObj)
+    }
+  }
+}
+```
+
+这里的 cache 为项目封装的方法对象，内部自动完成了JSON解析/转化的操作；
 
 
 

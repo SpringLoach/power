@@ -181,6 +181,36 @@ async getList() {
 
 
 
+### 执行顺序示例
+
+```javascript
+async serviceBookPage() {
+  console.log('serviceBookPage 1')
+  const r = await serviceBookPage(this.data.queryData)
+  console.log('serviceBookPage 2')
+  // ...大量代码
+  console.log('serviceBookPage 3')
+},
+
+async onShow() {
+  const res = await this.serviceBookPage()
+  console.log('res', res)
+  console.log('onshow Next')
+},
+```
+
+执行顺序
+
+```elm
+serviceBookPage 1
+serviceBookPage 2
+serviceBookPage 3
+res undefined
+onshow Next
+```
+
+
+
 
 
 ## 对象解构
