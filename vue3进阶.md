@@ -1,4 +1,4 @@
-#### 通过 watchEffect 将最新状态保存到对象上
+### 通过 watchEffect 将最新状态保存到对象上
 
 ```javascript
 const obj = ref({})
@@ -17,5 +17,21 @@ watchEffect(() => {
     num: number.value
   });
 });
+```
+
+
+
+### 计算属性传参
+
+```react
+<span class="margin-left">{{pointStatus(item.statusCode)}}</span>
+
+computed: {
+  pointStatus() {
+    return (text) => {
+      return this.statusMap.find(item => item.value === text).status || ''
+    }
+  }
+}
 ```
 

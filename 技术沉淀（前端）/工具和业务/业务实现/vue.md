@@ -79,6 +79,21 @@ const { data, err } = await api.getWechatShareConfigs({
 
 
 
+### 生产/开发兼容跳转
+
+生产模式使用 location.href 主要为了解决 ios 的分享问题；但该方法在开发模式行不通
+
+```javascript
+if (process.env.NODE_ENV === "production") {
+  const donationInfoUrl = `https://${window.location.host}/prm/fr/mobile/index/#/personalCenter`;
+  location.href = donationInfoUrl;
+} else {
+  router.push({ name: 'personalCenter' })
+}
+```
+
+
+
 ### 返回列表页保留查询条件
 
 从编辑页返回列表页保留查询条件
