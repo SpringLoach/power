@@ -2,17 +2,25 @@
 
 #### 拓展  
 
-|              名称               |                  说明                   |
-| :-----------------------------: | :-------------------------------------: |
-| Chinese(Simplified) Language... |             翻译应用为中文              |
-|             ESLint              |           检测错误代码并提示            |
-|           Live Server           |    提供本地服务器，实时检测代码效果     |
-|              Vetur              |          Vue语法高亮、智能提示          |
-|            Easy LESS            | 将 `.less` 自动编译为同名 `.css` 或其它 |
-|       微信小程序开发助手        |         标签、接口提示、模板等          |
-|       Markdown All in One       |              Markdown相关               |
-| Markdown Preview Github Styling |              Markdown相关               |
-|                /                |              开启自动保存               |
+|              名称               |                     说明                      |
+| :-----------------------------: | :-------------------------------------------: |
+| Chinese(Simplified) Language... |                翻译应用为中文                 |
+|             ESLint              |              检测错误代码并提示               |
+|           Live Server           |       提供本地服务器，实时检测代码效果        |
+|              Vetur              |             Vue语法高亮、智能提示             |
+|            Easy LESS            |    将 `.less` 自动编译为同名 `.css` 或其它    |
+|       微信小程序开发助手        |            标签、接口提示、模板等             |
+|       Markdown All in One       |                 Markdown相关                  |
+| Markdown Preview Github Styling |                 Markdown相关                  |
+|                /                |                 开启自动保存                  |
+|       Atom One Dark Theme       |             改变主题，如代码颜色              |
+|            Bookmarks            |            可以打标记，看源码可用             |
+|          vscode-icons           |        让文件管理处的各个文件带上图标         |
+|           htmltagwrap           |                 标签自动补全                  |
+|  ES7 React/Redux/... snippets   |            快速生成模板，如类组件             |
+|    vscode-styled-components     | react 中使用的 styled-components 库，智能提示 |
+|         project Manager         |            保存常用项目，快速打开             |
+|           Remote-SSH            |         连接远程服务器，修改远程文件          |
 
 #### 快捷键  
 
