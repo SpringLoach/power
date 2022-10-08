@@ -36,47 +36,47 @@
 
 
 
-![image-20220701142224741](D:\笔记\技术沉淀（后端）\node\img\mysql2)
+![image-20220701142224741](.\img\mysql2)
 
 
 
-![image-20220701142259908](D:\笔记\技术沉淀（后端）\node\img\mysql3)
+![image-20220701142259908](.\img\mysql3)
 
 
 
-![image-20220701140454768](D:\笔记\技术沉淀（后端）\node\img\mysql4)
+![image-20220701140454768](.\img\mysql4)
 
 
 
-![image-20220701142957635](D:\笔记\技术沉淀（后端）\node\img\mysql5)
+![image-20220701142957635](.\img\mysql5)
 
 
 
-![image-20220701143113039](D:\笔记\技术沉淀（后端）\node\img\mysql6)
+![image-20220701143113039](.\img\mysql6)
 
 
 
-![image-20220701143155127](D:\笔记\技术沉淀（后端）\node\img\mysql7)
+![image-20220701143155127](.\img\mysql7)
 
-![image-20220701143212681](D:\笔记\技术沉淀（后端）\node\img\mysql8)
+![image-20220701143212681](.\img\mysql8)
 
-![image-20220701143449451](D:\笔记\技术沉淀（后端）\node\img\mysql9)
+![image-20220701143449451](.\img\mysql9)
 
-![image-20220701143607776](D:\笔记\技术沉淀（后端）\node\img\mysql10)
+![image-20220701143607776](.\img\mysql10)
 
-![image-20220701143726908](D:\笔记\技术沉淀（后端）\node\img\mysql11)
+![image-20220701143726908](.\img\mysql11)
 
-![image-20220701143756492](D:\笔记\技术沉淀（后端）\node\img\mysql12)
+![image-20220701143756492](.\img\mysql12)
 
-![image-20220701144000281](C:\Users\86186\AppData\Roaming\Typora\typora-user-images\image-20220701144000281.png)
+![image-20220701144000281](.\img\mysql12.5)
 
 等待完成后点击下一步
 
-![image-20220701144040184](D:\笔记\技术沉淀（后端）\node\img\mysql13)
+![image-20220701144040184](.\img\mysql13)
 
 步骤完成后，可以在菜单搜索服务，找到对应的程序，确认是否开启了服务。
 
-![image-20220701144244625](D:\笔记\技术沉淀（后端）\node\img\mysql14)
+![image-20220701144244625](.\img\mysql14)
 
 
 
@@ -86,7 +86,7 @@
 
 > 将安装目录下的 `bin` 文件夹添加到环境变量，默认的安装路径如下。
 
-![image-20220701153559821](D:\笔记\技术沉淀（后端）\node\img\连接mysql)
+![image-20220701153559821](.\img\连接mysql)
 
 **验证**
 
@@ -155,25 +155,25 @@ insert into table_name  (nick, age, height) values ('demo', 18, 1.88);
 
 > 一个图形化操作数据库的工具，收费很贵，可以走[捷径](https://www.bilibili.com/read/cv15128680)下载。
 
-![image-20220701171106455](D:\笔记\技术沉淀（后端）\node\img\Navicat)
+![image-20220701171106455](.\img\Navicat)
 
 
 
 
 
-![image-20220701171202675](D:\笔记\技术沉淀（后端）\node\img\Navicat打开链接)
+![image-20220701171202675](.\img\Navicat打开链接)
 
 #### 手动编辑数据
 
-![image-20220701171301745](D:\笔记\技术沉淀（后端）\node\img\Navicat修改数据)
+![image-20220701171301745](.\img\Navicat修改数据)
 
 #### 编写SQL语句
 
-![image-20220701171417545](D:\笔记\技术沉淀（后端）\node\img\Navicat写SQL1)
+![image-20220701171417545](.\img\Navicat写SQL1)
 
 
 
-![image-20220701171434586](D:\笔记\技术沉淀（后端）\node\img\Navicat写SQL2)
+![image-20220701171434586](.\img\Navicat写SQL2)
 
 
 
@@ -181,7 +181,7 @@ insert into table_name  (nick, age, height) values ('demo', 18, 1.88);
 
 #### 保存查询结果
 
-![image-20220701175027311](D:\笔记\技术沉淀（后端）\node\img\Navicat保存sql)
+![image-20220701175027311](.\img\Navicat保存sql)
 
 :whale: 也可以打开外部查询，使用其它文件中的语句。
 
@@ -189,7 +189,7 @@ insert into table_name  (nick, age, height) values ('demo', 18, 1.88);
 
 #### 修改字符集
 
-![image-20220701175406654](D:\笔记\技术沉淀（后端）\node\img\Navicat字符集)
+![image-20220701175406654](.\img\Navicat字符集)
 
 :turtle: utf8mb4 可以支持 emoji 表情，这是 utf8 做不到的。
 
@@ -877,7 +877,7 @@ connections.execute(statement, [6000, 7], (err, results, fields) => {
 
 ### ORM
 
-![](D:\笔记\技术沉淀（后端）\node\img\orm)
+![](.\img\orm)
 
 
 

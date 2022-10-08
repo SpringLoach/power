@@ -361,6 +361,10 @@ server.listen(8888, '0.0.0.0', () => {
 });
 ```
 
+:whale: 使用 [URLSearchParams](http://www.qiutianaimeili.com/html/page/2019/05/ly9elo7w9bn.html) 代替 querystring 模块解析请求参数；
+
+:whale: [解决](https://blog.csdn.net/bnzjxbsjjdnnxj/article/details/123970816)服务器返回中文乱码问题。
+
 
 
 ### request对象-method
@@ -1838,7 +1842,6 @@ const app = new Koa();
 const middleware1 = async (ctx, next) => {
   ctx.message = "aaa";
   await next();
-  next();
   ctx.body = ctx.message;
 }
 
@@ -1850,6 +1853,7 @@ const middleware2 = async (ctx, next) => {
 const middleware3 = async (ctx, next) => {
   const result = await axios.get('http://123.207.32.32:9001/lyric?id=167876');
   ctx.message += result.data.lrc.lyric;
+  next();
 }
 
 app.use(middleware1);
