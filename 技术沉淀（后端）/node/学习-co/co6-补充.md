@@ -313,7 +313,9 @@ genrsa -out private.key 1024
 rsa -in private.key -pubout -out public.key
 ```
 
-:whale: 后面的数字代表设置私钥的长度。
+:whale: 后面的数字代表设置私钥的长度；
+
+:octopus: 如果出现 <span style="color: slategray">Invalid command 'genrsa'</span> 的报错，将 git 的所在路径添加到环境变量中即可。
 
 
 

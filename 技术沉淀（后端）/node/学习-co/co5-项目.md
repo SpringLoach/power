@@ -144,7 +144,7 @@ const app = new Koa();
 const userRouter = new Router({prefix: '/users'});
 
 userRouter.post('/', (ctx, next) => {
-  ctx.body = "创建用户成功"；
+  ctx.body = "创建用户成功";
 })
 
 // 注册路由
@@ -167,7 +167,7 @@ module.exports = app;
     - router                // 抽离出对路由的配置
       + user.router.js      // 具体业务层（只负责注册接口，不实现处理逻辑）
     - service               // 补充处理逻辑（补充实现查询数据的部分）
-      +user.service.js
+      + user.service.js
 ```
 
 #### 注册接口
@@ -246,8 +246,6 @@ const bodyParser = require('koa-bodyparser');
 const userRouter = require('../router/user.router');
 
 const app = new Koa();
-
-app.useRoutes = useRoutes;
 
 app.use(bodyParser()); // 添加，用于解析JSON
 app.use(userRouter.routes());
@@ -528,9 +526,9 @@ class UserService {
   // 查询记录-防重（添加）
   async getUserByName(name) {
     const statement = `SELECT * FROM user WHERE name = ?;`;
-    const result = await connection.execute(statement, [name]);
+    const [result] = await connection.execute(statement, [name]);
 
-    return result[0];
+    return result;
   }
 }
 
@@ -908,7 +906,7 @@ const fs = require('fs');
 const useRoutes = function() {
   fs.readdirSync(__dirname).forEach(file => {
     if (file === 'index.js') return;
-    const router = require(`./${file}`);
+    const router = require(`./${file}`); // 遍历的是文件名称
     this.use(router.routes()); // 注册到服务器实例
     this.use(router.allowedMethods()); // 恰当不支持方法
   })
