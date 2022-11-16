@@ -406,3 +406,203 @@ pm.globals.set("token", res.token);
 
 
 
+## 部署
+
+
+
+购买了云服务器，并尝试登录
+
+git bash
+
+```
+ssh root@120.79.30.111
+```
+
+
+
+报错
+
+```
+ Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+```
+
+
+
+然后在页面 重置实例密码，就好了
+
+
+
+尝试使用 Navicat 连接远程服务器的数据库报错
+
+```
+Host is not allowed to connect to this MySQL server
+```
+
+这是因为未允许远程服务器连接该账号，要在codeywhy的配置后添加上
+
+```
+FLUSH PRIVILEGES;
+```
+
+
+
+部署前端
+
+```
+yum install nginx
+```
+
+配置文件
+
+```
+etc/nginx/niginx.conf
+```
+
+配置分离，自动读取
+
+```
+etc/nginx/conf.d/*.conf
+```
+
+内容
+
+![image-20221025000948425](C:\Users\86186\AppData\Roaming\Typora\typora-user-images\image-20221025000948425.png)
+
+
+
+etc/nginx/niginx.conf 添加
+
+```
+# user nginx;
+user root;
+```
+
+
+
+重启
+
+```
+nginx -s reload
+```
+
+正常启动
+
+```
+nginx
+```
+
+
+
+
+
+### 服务器强制删除文件
+
+比如删除项目下的 node_modules
+
+https://blog.csdn.net/qq_35880671/article/details/125516338
+
+
+
+### Xftp7破解版
+
+https://www.jb51.net/softs/732920.html
+
+
+
+### XShell7破解版
+
+
+
+### koa配置允许跨域
+
+https://blog.csdn.net/weixin_40629244/article/details/121460274
+
+https://blog.csdn.net/qq_42975998/article/details/125103237
+
+
+
+### pm2启动node项目
+
+```elm
+pm2 start npm -- run start
+```
+
+
+
+### 重启
+
+<span style="backGround: #efe0b9">/root/react-system/react-system-api</span>
+
+```elm
+pm2 start npm -- run start
+```
+
+```elm
+nginx
+```
+
+
+
+### 更新
+
+到接口目录下
+
+<span style="backGround: #efe0b9">/root/react-system/react-system-api</span>
+
+```
+git pull
+```
+
+
+
+将新的前端打包代码，替换旧的
+
+<span style="backGround: #efe0b9">/root/react-system/build</span>
+
+
+
+数据库迁移
+
+1.本地MySQL直接导出数据库
+
+![image-20221106193009191](.\img\迁移1)
+
+2.服务器MySQL中执⾏MySQL
+
+![image-20221106193020798](.\img\迁移2)
+
+
+
+https://z4a.net/images/2022/11/06/2022.11.6-1.png
+
+https://z4a.net/images/2022/11/06/2022.11.6-2.jpg
+
+
+
+庆祝博客模板完成啦~
+
+
+
+第一篇博客诞生
+
+
+
+光阴谁的面子都不给，过去的东西一旦忘记，就真的逝去了。一直都想着，能够记录自己的生活，实在太重要啦。现在，凭借着自己的努力，搭建出自己的博客啦！
+
+
+
+wn项目的日常加班
+
+https://z4a.net/images/2022/11/06/2022.11.6-1.png
+
+怎么c端要来，b端也要我操心呀，小公司留不住技术成熟的人，真是硬伤，不过最坑的，应该还是工资低吧。。
+
+
+
+疫情形式升级
+
+广州的阳性日增上千了。。这是三年来最严重的一天，牙签弟她们在海珠区是真的很难受了。现在保利也把西门外的门上锁了。天天做核酸，居家，疫情却越来越严峻，可以用”做核算了吗“代替”吃了吗“了。
+
+https://z4a.net/images/2022/11/06/2022.11.6-2.jpg
+
+新的手机壳到了
