@@ -78,11 +78,14 @@ public class Hey {
 }
 ```
 
-| 快捷键   | 说明             |
-| -------- | ---------------- |
-| psvm     | 入口             |
-| sout     | 打印             |
-| Ctrl + D | 复制当行到下一行 |
+| 快捷键              | 说明             |
+| ------------------- | ---------------- |
+| psvm                | 入口             |
+| sout                | 打印             |
+| Ctrl + D            | 复制当行到下一行 |
+| / + * + * + 回车    | 自动生成文档注释 |
+| 10.for + 回车       | 生成for循环      |
+| 数组变量.for + 回车 | 生成增强for循环  |
 
 通过左边的绿点可以直接执行程序
 
@@ -136,6 +139,32 @@ public class Hey {
 
 
 
+#### 运行包下的类
+
+<span style="backGround: #efe0b9">java\JavaSE\base_grammar\src\com\baidu\www</span>
+
+> java\项目名\模块名\src\包路径\
+
+```elm
+javac Demo.java --encoding UTF-8
+```
+
+:star2: 文件含中文，故加参数
+
+<span style="backGround: #efe0b9">java\JavaSE\base_grammar\src</span>
+
+```elm
+java com.baidu.www.Demo
+```
+
+
+
+
+
+
+
+
+
 #### 注释
 
 ```java
@@ -148,7 +177,63 @@ public class Hey {
  */
 ```
 
-:whale: 文档注释可以通过 `/**` + 回车快速生成。
+:ghost: 文档注释可以通过 `/**` + 回车快速生成。
+
+| 文档注释参数 | 参数信息                  |
+| ------------ | ------------------------- |
+| @author      | 作者名                    |
+| @version     | 版本号                    |
+| @since       | 指明需要最早使用的jsk版本 |
+| @param       | 参数名                    |
+| @return      | 返回值情况                |
+| @throws      | 异常抛出情况              |
+
+`文档注释`
+
+```java
+/**
+ * @author Master
+ * @version 1.0
+ * @since 1.8
+ */
+public class Demo {
+    /**
+     *
+     * @param demo
+     * @return
+     * @throws Exception
+     */
+    public String callMan (String demo) throws Exception{
+        return demo;
+    }
+}
+```
+
+:ghost: 可以为类和方法添加注释，快捷键生成时，自动补注解。
+
+
+
+#### 生成JavaDoc文档
+
+> 生成的 <span style="color: green">index.html</span> 文件有相关的信息。
+
+命令行方式
+
+<span style="backGround: #efe0b9">命令行到当前文件夹</span>
+
+```elm
+javadoc -encoding UTF-8 -charset UTF-8 Demo.java
+```
+
+:whale: 加上的参数可以避免中文乱码
+
+
+
+IDEA方式
+
+https://www.cnblogs.com/hyxdz/p/15958937.html
+
+
 
 
 
@@ -339,11 +424,24 @@ public class Hey {
 
 一行可以声明并初始化多个变量，但可读性差，不推荐；
 
+**与 JavaScript 比**
+
 使用 == 判断相等性；等价于 javascript 的 ===；
+
+变量声明类似于 let，通过添加关键字 final 类似于 const；
 
 自增自减先后
 
 字符串连接符
 
+if else、switch case、while、do while、
+
+数组下标、数组length
+
+
+
+**帮助文档**
+
 阿里巴巴开发手册
 
+jdk帮助文档 https://www.oracle.com/cn/java/technologies/java-se-api-doc.html
