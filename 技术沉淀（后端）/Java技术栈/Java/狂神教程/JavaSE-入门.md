@@ -78,14 +78,20 @@ public class Hey {
 }
 ```
 
-| 快捷键              | 说明             |
-| ------------------- | ---------------- |
-| psvm                | 入口             |
-| sout                | 打印             |
-| Ctrl + D            | 复制当行到下一行 |
-| / + * + * + 回车    | 自动生成文档注释 |
-| 10.for + 回车       | 生成for循环      |
-| 数组变量.for + 回车 | 生成增强for循环  |
+| 快捷键                                   | 说明                    |
+| ---------------------------------------- | ----------------------- |
+| psvm                                     | 入口                    |
+| sout                                     | 打印                    |
+| Ctrl + D                                 | 复制当行到下一行        |
+| / + * + * + 回车                         | 自动生成文档注释        |
+| 10.for + 回车                            | 生成for循环             |
+| 数组变量.for + 回车                      | 生成增强for循环         |
+| Alt + Insert 选择 Constructor            | 生成构造函数            |
+| Alt + Insert 选择 Getter/Setter          | 生成getter/setter(封装) |
+| Alt + Insert 选择 Override Methods       | 生成方法重写            |
+| 选择代码 + Ctrl + Alt + T 选择 try/catch | 生成 try/catch          |
+| Alt + Enter 选择方案                     | 智能修复代码问题        |
+| Alt + Enter                              | 生成变量接收值          |
 
 通过左边的绿点可以直接执行程序
 
@@ -366,6 +372,9 @@ int b = 2;
 
 System.out.println(""+a+b);  		 // 12
 System.out.println(a+b+"");  		 // 3
+
+System.out.println('1' + 2);         // 51
+System.out.println("1" + 2);		 // 12
 ```
 
 
@@ -434,9 +443,15 @@ public class Hey {
 
 字符串连接符
 
+三元运算符
+
+变量作用域
+
 if else、switch case、while、do while、
 
 数组下标、数组length
+
+方法参数传入原始值、引用值的处理
 
 
 
@@ -445,3 +460,4 @@ if else、switch case、while、do while、
 阿里巴巴开发手册
 
 jdk帮助文档 https://www.oracle.com/cn/java/technologies/java-se-api-doc.html
+
