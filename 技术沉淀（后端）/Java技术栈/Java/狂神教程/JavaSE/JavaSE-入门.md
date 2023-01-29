@@ -92,6 +92,10 @@ public class Hey {
 | 选择代码 + Ctrl + Alt + T 选择 try/catch | 生成 try/catch          |
 | Alt + Enter 选择方案                     | 智能修复代码问题        |
 | Alt + Enter                              | 生成变量接收值          |
+| Ctrl + O                                 | 生成方法重写            |
+| Ctrl + Shrift + -/+                      | 折叠/展开所有方法       |
+| Shift + Shift                            | 全局搜索                |
+| Shift + Shift 点击 Find in Files         | 全局搜索关键词          |
 
 通过左边的绿点可以直接执行程序
 
@@ -461,3 +465,4 @@ if else、switch case、while、do while、
 
 jdk帮助文档 https://www.oracle.com/cn/java/technologies/java-se-api-doc.html
 
+javaBean - 实体类
