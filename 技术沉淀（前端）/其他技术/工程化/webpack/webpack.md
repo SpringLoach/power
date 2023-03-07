@@ -1145,12 +1145,13 @@ importAll(require.context('../components/', true, /\.js$/));
 
 #### 生产环境_分别配置  
 
-> 由于两个环境的构建目标不同，往往将它们不同的部分拆分，并保留一份通用配置。   
+> 由于两个环境的构建目标不同，往往将它们不同的部分拆分，并保留一份通用配置。     
 
-- 项目   
-  + webpack.common.js  
-  + webpack.dev.js  
-  + webpack.prod.js  
+- 项目文件
+  + build
+    - webpack.common.js  # 公共
+    - webpack.dev.js            # 开发
+    - webpack.prod.js          # 生产
 
 <span style="backGround: #efe0b9">webpack.common.js</span>
 
@@ -1173,6 +1174,10 @@ module.exports = {
     clean: true,
   }, 
 };
+```
+
+```elm
+npm install webpack-merge -D
 ```
 
 <span style="backGround: #efe0b9">webpack.dev.js</span>
@@ -1226,11 +1231,13 @@ module.exports = {
 ```json
 {
   "scripts": {
-    "serve": "webpack serve --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "serve": "webpack serve --open --config build/webpack.dev.js",
+    "build": "webpack --config build/webpack.prod.js"
   },
 }
 ```
+
+:turtle: 配置文件的命名可以不为 <span style="color: slategray">webpack.config.js</span>
 
 
 
