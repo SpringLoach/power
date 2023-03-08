@@ -7,7 +7,7 @@
 | Chinese(Simplified) Language... | 翻译应用为中文                                |
 | ESLint                          | 检测错误代码并提示                            |
 | Live Server                     | 提供本地服务器，实时检测代码效果              |
-| Vetur                           | Vue语法高亮、智能提示                         |
+| Vetur                           | Vue2语法高亮、智能提示                        |
 | Vue Language Features (Volar)   | Vue3中更友好的语法高亮、智能提示              |
 | Easy LESS                       | 将 `.less` 自动编译为同名 `.css` 或其它       |
 | 微信小程序开发助手              | 标签、接口提示、模板等                        |
