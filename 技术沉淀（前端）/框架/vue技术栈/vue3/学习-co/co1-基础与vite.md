@@ -614,20 +614,6 @@ vue create xxname
 
 
 
-### 浏览器适配
-
-<span style="backGround: #efe0b9">.browserslistrx</span>
-
-```react
-> 1%                  // 市场份额大于1%
-last 2 versions       // 每个浏览器的最后两个版本
-not dead              // 仍在维护
-```
-
-> 根据这些条件决定要打包的css和js要适配哪些浏览器。
-
-
-
 ## Vue3实现过渡动画
 
 ### 代码片段插件推荐
