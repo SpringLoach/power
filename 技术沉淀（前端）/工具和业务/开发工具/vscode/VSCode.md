@@ -33,6 +33,8 @@
 | `Shift` + `Alt` + `↓` |       快速复制选中行       |
 | `Alt` + `Shift` + `F` |           格式化           |
 |     `Ctrl` + `~`      |          打开终端          |
+|     `Ctrl` + `F`      |         文档内匹配         |
+|    `Alt` + `Enter`    |       选中所有匹配项       |
 |      log + `Tab`      |       console.log()        |
 |       div#demo        |  <div id="demo"\></div\>   |
 |       div.demo        | <div class="demo"\></div\> |
