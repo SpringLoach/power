@@ -51,13 +51,6 @@
 
 
 
-## 补充的话
-
-在[仓库](https://github.com/SpringLoach/power)，还提供了许多<span style="color: #3a84aa">前端常见需求</span>及实现的归纳整理，欢迎客官看看~
-
-如果这篇笔记能够帮助到你，请帮忙在 [github](https://github.com/SpringLoach/power) 上点亮 `star`，感谢！
-
-
 
 
 ## 笔记思维导图
