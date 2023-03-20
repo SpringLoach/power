@@ -175,7 +175,7 @@ npm run test
 
 ## 常用配置
 
-添加的配置将作用于整个目录，配置文件有以下三种方式。
+编写配置文件有以下三种方式，添加的配置将作用于整个目录：
 
 - 使用 JavaScript/json/yaml，编写对应的 `.eslintrc.*` 配置；
 
@@ -191,7 +191,7 @@ npm run test
 
 ### 配置规则项
 
-配置项 `rules` 可以对细粒度的语法规则进行配置
+配置 `rules` 可以对细粒度的语法规则进行配置
 
 ```json
 module.exports = {
