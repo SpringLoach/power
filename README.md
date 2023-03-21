@@ -56,8 +56,6 @@
 
 ## 笔记思维导图
 
-<img src="https://wx4.sinaimg.cn/large/008xvbVOgy1hbiyfs8iq3j318i1q4wu6.jpg" alt="" />
 
 
-
-![](http://springloach.oss-cn-shenzhen.aliyuncs.com/images%5Cblogs%5Cpublic%5C%E7%AC%94%E8%AE%B0%E5%A4%A7%E7%BA%B2.png )
+<img src="http://springloach.oss-cn-shenzhen.aliyuncs.com/images/blogs/public/tip.jpg" style="width: 752px" alt="" />
