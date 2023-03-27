@@ -61,7 +61,7 @@ rollup main.js --file bundle.js --format cjs
 同时用于浏览器和 Node.js：
 
 ```shell
-# 需要为 UMD 格式的包指定一个名称
+# 需要为 UMD 格式的包指定一个名称，否则会报错
 rollup main.js --file bundle.js --format umd --name "myBundle"
 ```
 
@@ -269,7 +269,7 @@ export default {
 };
 ```
 
-:octopus: 如果没有使用插件 `@rollup/plugin-node-resolve`，那么输出的 `bundle.js` 将不会包含<span style="color: slategray">使用的包</span>，并提示：
+:octopus: 如果没有使用插件 `@rollup/plugin-node-resolve`，那么输出的 `bundle.js` 将不会注入<span style="color: slategray">使用到的包</span>，并在控制台提示：
 
 ```elm
 (!) Unresolved dependencies
@@ -505,6 +505,35 @@ export default {
   "start": "serve public"
 }
 ```
+
+
+
+## 生成bundle规律总结
+
+- 编写源码（作为配置入口）使用 es 语法，编写配置使用 commonJs 语法，可以生成 bundle 
+
+
+
+<span style="color: #3a84aa">使用 es 的语法编写源码和配置文件</span>
+
+| 编译方式 | 导入语法       | 导出语法 |
+| -------- | -------------- | -------- |
+| cjs      | 无，内容被注入 | commonJS |
+| es       | 无，内容被注入 | es       |
+
+<span style="color: #3a84aa">使用 commonJS 的语法编写源码和配置文件</span>
+
+| 编译方式 | 导入语法 | 导出语法 |
+| -------- | -------- | -------- |
+| cjs      | commonJS | commonJS |
+| es       | commonJS | commonJS |
+
+<span style="color: #3a84aa">使用 commonJS 的语法编写源码和配置文件 + @rollup/plugin-commonjs 处理</span>
+
+| 编译方式 | 导入语法       | 导出语法 |
+| -------- | -------------- | -------- |
+| cjs      | 无，内容被注入 | commonJS |
+| es       | 无，内容被注入 | es       |
 
 
 
