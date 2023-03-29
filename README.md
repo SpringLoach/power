@@ -28,6 +28,7 @@
 ### 工程化
 
 - [webpack - 常用配置整理](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF/%E5%B7%A5%E7%A8%8B%E5%8C%96/webpack/%E5%B8%B8%E8%A7%84%E6%A2%B3%E7%90%86.md)
+- [vite - 编写插件体验](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF/%E5%B7%A5%E7%A8%8B%E5%8C%96/vite/vite-%E6%8F%92%E4%BB%B6%E4%BD%93%E9%AA%8C(unitFit).md)
 - [gulp - 快速入门](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF/%E5%B7%A5%E7%A8%8B%E5%8C%96/gulp/%E5%88%9D%E4%BD%93%E9%AA%8C.md)
 - [rollup - 快速入门](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF/%E5%B7%A5%E7%A8%8B%E5%8C%96/rollup/rollup.md)
 - [esbuild - 快速入门](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF/%E5%B7%A5%E7%A8%8B%E5%8C%96/esbuild/esbuild.md)
@@ -42,6 +43,17 @@
 - [git 在项目中的实际使用](https://github.com/SpringLoach/power/blob/main/%E8%BE%85%E5%8A%A9%E8%A6%81%E7%B4%A0/%E7%9B%B8%E5%85%B3%E6%8A%80%E8%83%BD/git/%E9%80%9F%E6%9F%A5.md)
 - [markdown 的语法文档](https://github.com/SpringLoach/power/blob/main/%E8%BE%85%E5%8A%A9%E8%A6%81%E7%B4%A0/%E7%9B%B8%E5%85%B3%E6%8A%80%E8%83%BD/markdown/markdown.md)
 - [制定个人专属的 markdown 笔记方式](https://github.com/SpringLoach/power/blob/main/%E8%BE%85%E5%8A%A9%E8%A6%81%E7%B4%A0/%E7%9B%B8%E5%85%B3%E6%8A%80%E8%83%BD/markdown/%E9%A3%8E%E6%A0%BC%E8%A7%84%E8%8C%83.md)
+
+
+
+### 基础
+
+- [css - 样式速查表](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%8E%9F%E7%94%9F%E6%8A%80%E6%9C%AF/css/%E5%8E%9F%E7%AC%94%E8%AE%B0/%E6%A0%B7%E5%BC%8F%E9%80%9F%E6%9F%A5%E8%A1%A8.md)
+
+- [css - 水平垂直居中](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%8E%9F%E7%94%9F%E6%8A%80%E6%9C%AF/css/%E5%8E%9F%E7%AC%94%E8%AE%B0/%E5%AF%B9%E9%BD%90.md)
+
+- [css - 媒体查询&变量&盒模型](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%8E%9F%E7%94%9F%E6%8A%80%E6%9C%AF/css/%E5%8E%9F%E7%AC%94%E8%AE%B0/%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2.md)
+- [css - 动画库](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%8E%9F%E7%94%9F%E6%8A%80%E6%9C%AF/css/%E5%8E%9F%E7%AC%94%E8%AE%B0/%E5%8A%A8%E7%94%BB%E5%BA%93.md)
 
 
 
