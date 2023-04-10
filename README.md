@@ -22,7 +22,7 @@ react-system 配套的接口服务，基于 Node.js 和 Koa 实现，完成了�
 
 🎢 <span style="color: #f7534f;font-weight:600">cool-app</span>
 
-基于 Vue3 版本的 uni-app，实现移动端上各种各样的需求案例，并去实现一些知名应用的静态页面，项目正在计划中。
+基于 Vue3 版本的 uni-app，实现移动端上各种各样的需求案例，并去实现一些知名应用的静态页面，正在计划启动中。
 
 
 
