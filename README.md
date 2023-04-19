@@ -100,6 +100,7 @@ react-system 配套的接口服务，基于 Node.js 和 Koa 实现，完成了�
 - [css - 水平垂直居中](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%8E%9F%E7%94%9F%E6%8A%80%E6%9C%AF/css/%E5%8E%9F%E7%AC%94%E8%AE%B0/%E5%AF%B9%E9%BD%90.md)
 - [css - 媒体查询&变量&盒模型](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%8E%9F%E7%94%9F%E6%8A%80%E6%9C%AF/css/%E5%8E%9F%E7%AC%94%E8%AE%B0/%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2.md)
 - [css - 动画库](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%8E%9F%E7%94%9F%E6%8A%80%E6%9C%AF/css/%E5%8E%9F%E7%AC%94%E8%AE%B0/%E5%8A%A8%E7%94%BB%E5%BA%93.md)
+- [typescript - 快速入门](https://github.com/SpringLoach/power/blob/main/%E6%8A%80%E6%9C%AF%E6%B2%89%E6%B7%80%EF%BC%88%E5%89%8D%E7%AB%AF%EF%BC%89/%E5%8E%9F%E7%94%9F%E6%8A%80%E6%9C%AF/TypeScript/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8.md)
 
 
 
